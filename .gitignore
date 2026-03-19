@@ -1,0 +1,18 @@
+# Files to exclude when publishing to GitHub
+# Usage: cp .github/.gitignore-github .gitignore (on the github branch)
+
+# Claude Code project context (contains internal URLs and infra details)
+CLAUDE.md
+.claude/
+memory/
+MEMORY.md
+
+# Woodpecker CI (Gitea-specific, won't work on GitHub)
+.woodpecker.yml
+.woodpecker/
+
+# Internal infrastructure details
+.ark-staging
+docs/OPGUIDE.md
+docs/ewaste-postcard.md
+docs/torrents-as-resilience.md

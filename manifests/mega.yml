@@ -1,0 +1,264 @@
+# mega.yml — "The Everything" Edition
+# The medium loadout PLUS Stack Overflow, multilingual Wikipedias,
+# additional Stack Exchange sites, and more.
+# Targets a 1 TB drive (~930 GB usable).
+
+loadout: mega
+description: "The full medium loadout plus Stack Overflow, 8 Wikipedia languages, TED, and more"
+target_size_gb: 930
+
+zim:
+  # ═══════════════════════════════════════════════════════════════════
+  # Everything from medium.yml
+  # ═══════════════════════════════════════════════════════════════════
+
+  # ── Tier 1: Foundation ───────────────────────────────────────────
+
+  - name: wikipedia_en_all
+    flavour: maxi
+    tier: foundation
+
+  - name: wikipedia_en_simple_all
+    flavour: maxi
+    tier: foundation
+
+  - name: wikipedia_en_medicine
+    flavour: maxi
+    tier: foundation
+
+  - name: medlineplus.gov_en_all
+    tier: foundation
+
+  - name: gutenberg_en_all
+    tier: foundation
+
+  # ── Tier 2: Practical Survival ───────────────────────────────────
+
+  - name: ifixit_en_all
+    tier: survival
+
+  - name: wikibooks_en_all
+    flavour: maxi
+    tier: survival
+
+  - name: wikivoyage_en_all
+    flavour: maxi
+    tier: survival
+
+  # ── Tier 3: Stack Exchange (from medium) ─────────────────────────
+
+  - name: diy.stackexchange.com_en_all
+    tier: practical
+
+  - name: gardening.stackexchange.com_en_all
+    tier: practical
+
+  - name: cooking.stackexchange.com_en_all
+    tier: practical
+
+  - name: biology.stackexchange.com_en_all
+    tier: practical
+
+  - name: chemistry.stackexchange.com_en_all
+    tier: practical
+
+  - name: physics.stackexchange.com_en_all
+    tier: practical
+
+  - name: math.stackexchange.com_en_all
+    tier: practical
+
+  - name: electronics.stackexchange.com_en_all
+    tier: practical
+
+  - name: engineering.stackexchange.com_en_all
+    tier: practical
+
+  - name: sustainability.stackexchange.com_en_all
+    tier: practical
+
+  - name: outdoors.stackexchange.com_en_all
+    tier: practical
+
+  - name: astronomy.stackexchange.com_en_all
+    tier: practical
+
+  - name: history.stackexchange.com_en_all
+    tier: practical
+
+  - name: law.stackexchange.com_en_all
+    tier: practical
+
+  # ── Tier 4: Education & Culture (from medium) ───────────────────
+
+  - name: freecodecamp_en_all
+    tier: education
+
+  - name: phet_en_all
+    tier: education
+
+  - name: wiktionary_en_all
+    flavour: nopic
+    tier: education
+
+  - name: wikisource_en_all
+    flavour: maxi
+    tier: education
+
+  - name: wikiquote_en_all
+    flavour: maxi
+    tier: education
+
+  # ── Tier 5: Reference (from medium) ─────────────────────────────
+
+  - prefix: devdocs_en_
+    tier: reference
+
+  # ═══════════════════════════════════════════════════════════════════
+  # Mega additions
+  # ═══════════════════════════════════════════════════════════════════
+
+  # ── Stack Overflow (~75 GB) ──────────────────────────────────────
+
+  - name: stackoverflow.com_en_all
+    tier: mega
+    note: "The single most useful programming resource ever assembled"
+
+  # ── Additional Stack Exchange sites (~9 GB) ──────────────────────
+
+  - name: superuser.com_en_all
+    tier: mega
+    note: "Power user Q&A — hardware, software, networking"
+
+  - name: serverfault.com_en_all
+    tier: mega
+    note: "Sysadmin Q&A — servers, networking, infrastructure"
+
+  - name: askubuntu.com_en_all
+    tier: mega
+    note: "Ubuntu/Linux desktop Q&A"
+
+  - name: unix.stackexchange.com_en_all
+    tier: mega
+    note: "Unix & Linux Q&A"
+
+  # ── Arch Wiki (0.03 GB — basically free) ─────────────────────────
+
+  - name: archlinux_en_all
+    flavour: maxi
+    tier: mega
+    note: "The best Linux documentation on the internet, period"
+
+  # ── Multilingual Wikipedias (~237 GB) ────────────────────────────
+
+  - name: wikipedia_es_all
+    flavour: maxi
+    tier: mega
+    note: "Spanish — 2nd most spoken in the US, 4th globally"
+
+  - name: wikipedia_zh_all
+    flavour: maxi
+    tier: mega
+    note: "Mandarin Chinese — most spoken language globally"
+
+  - name: wikipedia_fr_all
+    flavour: maxi
+    tier: mega
+    note: "French — widely spoken in Africa, diplomacy, science"
+
+  - name: wikipedia_de_all
+    flavour: maxi
+    tier: mega
+    note: "German — strong in engineering, science, philosophy"
+
+  - name: wikipedia_ru_all
+    flavour: maxi
+    tier: mega
+    note: "Russian — significant scientific and literary tradition"
+
+  - name: wikipedia_ja_all
+    flavour: maxi
+    tier: mega
+    note: "Japanese — 3rd largest economy, rich technical content"
+
+  - name: wikipedia_pt_all
+    flavour: maxi
+    tier: mega
+    note: "Portuguese — widely spoken in South America and Africa"
+
+  - name: wikipedia_ar_all
+    flavour: maxi
+    tier: mega
+    note: "Arabic — 5th most spoken, covers Middle East and North Africa"
+
+  - name: wikipedia_hi_all
+    flavour: maxi
+    tier: mega
+    note: "Hindi — 3rd most spoken language globally"
+
+  # ── TED Talks (~10.5 GB) ────────────────────────────────────────
+
+  - name: ted_mul_all
+    tier: mega
+    note: "All TED talks — multilingual, ideas worth spreading, offline"
+
+  # ── OpenStreetMap Wiki (~1 GB) ──────────────────────────────────
+
+  - name: openstreetmap-wiki_en_all
+    flavour: maxi
+    tier: mega
+    note: "How to read, use, and contribute to OpenStreetMap"
+
+# ── PDFs (same as medium) ────────────────────────────────────────
+
+pdfs:
+  - url: "https://hesperian.org/wp-content/uploads/pdf/en_wtnd_2022.pdf"
+    filename: "Where_There_Is_No_Doctor.pdf"
+
+  - url: "https://hesperian.org/wp-content/uploads/pdf/en_wtndentist_2022.pdf"
+    filename: "Where_There_Is_No_Dentist.pdf"
+
+# ── Linux ISOs — Boot from bare metal ──────────────────────────────────
+
+isos:
+  - torrent_url: "https://cdimage.debian.org/cdimage/archive/latest-oldstable/amd64/bt-dvd/debian-12.13.0-amd64-DVD-1.iso.torrent"
+    note: "Debian 12 Bookworm (oldstable) — LTS until 2028"
+
+  - torrent_url: "https://cdimage.debian.org/cdimage/release/current/amd64/bt-dvd/debian-13.4.0-amd64-DVD-1.iso.torrent"
+    note: "Debian 13 Trixie (stable) — current release"
+
+  - torrent_url: "https://download.rockylinux.org/pub/rocky/8/isos/x86_64/Rocky-8.10-x86_64-minimal.torrent"
+    note: "Rocky 8.10 (RHEL 8 compatible) — supported until 2029"
+
+  - torrent_url: "https://download.rockylinux.org/pub/rocky/9/isos/x86_64/Rocky-9.7-x86_64-minimal.torrent"
+    note: "Rocky 9.7 (RHEL 9 compatible) — supported until 2032"
+
+  - torrent_url: "https://mirror.rackspace.com/archlinux/iso/2026.03.01/archlinux-2026.03.01-x86_64.iso.torrent"
+    note: "Arch Linux 2026.03 — rolling release, latest snapshot"
+
+  - url: "https://download.tails.net/tails/stable/tails-amd64-7.5/tails-amd64-7.5.iso"
+    note: "Tails 7.5 — privacy-focused OS, boots from USB, no install needed"
+
+# ── shame/ — Accountability Archives ────────────────────────────────────
+
+archives:
+  - id: compiled_epstein_files
+    dest: shame
+    source: archive.org
+    note: "Compiled court documents, flight logs, and related filings"
+
+  - id: jeffrey-epstein-files-full
+    dest: shame
+    source: archive.org
+    note: "Full document collection"
+
+  - id: jeffrey-epstein-part-22-of-22_20250227_2148
+    dest: shame
+    source: archive.org
+    note: "FBI documents — 22 parts, FOIA release"
+
+kiwix_platforms:
+  - desktop
+  - android
+  - macos
+  - tools

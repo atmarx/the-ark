@@ -1,0 +1,227 @@
+# medium.yml — "The Mostly Harmless Edition"
+# The complete foundation loadout from the-ark spec.
+# ~280 GB estimated, targeting 465 GB usable on a 500 GB spinner.
+
+loadout: medium
+description: "The medium copy — complete foundation of human knowledge"
+target_size_gb: 465
+
+zim:
+  # ── Tier 1: Foundation of All Human Knowledge (~165 GB) ──────────────
+
+  - name: wikipedia_en_all
+    flavour: maxi
+    tier: foundation
+    note: "Full English Wikipedia with images — the single most valuable file on the drive"
+
+  - name: wikipedia_en_simple_all
+    flavour: maxi
+    tier: foundation
+    note: "Simple English Wikipedia — 10-year-old reading level, ESL-friendly"
+
+  - name: wikipedia_en_medicine
+    flavour: maxi
+    tier: foundation
+    note: "WikiMed — 65,000+ curated medical articles with images"
+
+  - name: medlineplus.gov_en_all
+    tier: foundation
+    note: "U.S. National Library of Medicine — diseases, drugs, lab tests"
+
+  - name: gutenberg_en_all
+    tier: foundation
+    note: "Project Gutenberg — 50,000+ public domain books"
+
+  # ── Tier 2: Practical Survival Knowledge (~25 GB) ────────────────────
+
+  - name: ifixit_en_all
+    tier: survival
+    note: "iFixit — step-by-step repair guides, illustrated"
+
+  - name: wikibooks_en_all
+    flavour: maxi
+    tier: survival
+    note: "Open textbooks — cooking, engineering, languages, programming"
+
+  - name: wikivoyage_en_all
+    flavour: maxi
+    tier: survival
+    note: "World travel guide / gazetteer of every notable place on Earth"
+
+  # ── Tier 3: How to Actually Do Things (~30 GB) ──────────────────────
+
+  - name: diy.stackexchange.com_en_all
+    tier: practical
+    note: "Home Improvement — how to fix everything in your house"
+
+  - name: gardening.stackexchange.com_en_all
+    tier: practical
+    note: "Growing food"
+
+  - name: cooking.stackexchange.com_en_all
+    tier: practical
+    note: "Seasoned Advice — preparing food"
+
+  - name: biology.stackexchange.com_en_all
+    tier: practical
+    note: "Understanding the living world"
+
+  - name: chemistry.stackexchange.com_en_all
+    tier: practical
+    note: "Understanding the material world"
+
+  - name: physics.stackexchange.com_en_all
+    tier: practical
+    note: "Understanding the physical world"
+
+  - name: math.stackexchange.com_en_all
+    tier: practical
+    note: "The language of the universe"
+
+  - name: electronics.stackexchange.com_en_all
+    tier: practical
+    note: "Building and repairing circuits"
+
+  - name: engineering.stackexchange.com_en_all
+    tier: practical
+    note: "Applied physics for infrastructure"
+
+  - name: sustainability.stackexchange.com_en_all
+    tier: practical
+    note: "Living without the grid"
+
+  - name: outdoors.stackexchange.com_en_all
+    tier: practical
+    note: "Surviving outside"
+
+  - name: astronomy.stackexchange.com_en_all
+    tier: practical
+    note: "Navigating by stars, understanding the sky"
+
+  - name: history.stackexchange.com_en_all
+    tier: practical
+    note: "Understanding how we got here"
+
+  - name: law.stackexchange.com_en_all
+    tier: practical
+    note: "How civilizations organize rules"
+
+  # ── Tier 4: Education & Culture (~30 GB) ─────────────────────────────
+
+  - name: freecodecamp_en_all
+    tier: education
+    note: "Full programming curriculum"
+
+  - name: phet_en_all
+    tier: education
+    note: "PhET — interactive science simulations for kids"
+
+  - name: wiktionary_en_all
+    flavour: nopic
+    tier: education
+    note: "Complete dictionary with etymologies, pronunciations, translations (nopic — no maxi available)"
+
+  - name: wikisource_en_all
+    flavour: maxi
+    tier: education
+    note: "Primary source documents — constitutions, treaties, historical speeches"
+
+  - name: wikiquote_en_all
+    flavour: maxi
+    tier: education
+    note: "Because someone will need to settle an argument about who said what"
+
+  # ── Tier 5: Maps & Reference (~30 GB) ────────────────────────────────
+
+  - prefix: devdocs_en_
+    tier: reference
+    note: "DevDocs — documentation for 100+ programming languages and tools (~223 small ZIMs, ~600 MB total)"
+
+# ── PDFs: The 'Rebuild Civilization' Shelf ──────────────────────────────
+
+pdfs:
+  # ── Medical ──
+  - url: "https://hesperian.org/wp-content/uploads/pdf/en_wtnd_2025/en_wtnd_2025_{fm,toc,01..23}.pdf"
+    filename: "Where_There_Is_No_Doctor_2025.pdf"
+    note: "Combined from 25 chapter PDFs — Hesperian 2025 edition"
+
+  - url: "https://hesperian.org/wp-content/uploads/pdf/en_dent_2024/en_dent_2024_{fm,01..12}.pdf"
+    filename: "Where_There_Is_No_Dentist_2024.pdf"
+    note: "Combined from 13 chapter PDFs — Hesperian 2024 edition"
+
+  # ── Survival & Practical ──
+  - url: "https://humanurehandbook.com/downloads/Humanure_Handbook_all.pdf"
+    filename: "survival/Humanure_Handbook.pdf"
+    note: "Joseph Jenkins — composting human waste safely. Essential sanitation reference."
+
+  # TODO: FM 21-76 US Army Survival Manual (archive.org, currently 503)
+  # TODO: Seed saving guide (freely licensed)
+  # TODO: Water purification / sanitation guide
+
+  # ── Foundational Documents ──
+  - url: "https://www.ohchr.org/sites/default/files/UDHR/Documents/UDHR_Translations/eng.pdf"
+    filename: "foundational/Universal_Declaration_of_Human_Rights.pdf"
+    note: "UN OHCHR — the foundation of international human rights law"
+
+  # TODO: Geneva Conventions (ICRC PDF)
+  # TODO: UN Convention on the Rights of the Child
+
+  # ── Open Source Licenses ──
+  # Staged as plain text files in pdfs/licenses/
+  # GPL v2, GPL v3, MIT, BSD-3-Clause, Apache 2.0,
+  # CC BY 4.0, CC BY-SA 4.0, MPL 2.0
+
+# ── shame/ — Accountability Archives ────────────────────────────────────
+# Public court documents, government releases, and records of institutional
+# failure. Because a real archive includes the parts we have to reckon with.
+
+archives:
+  - id: compiled_epstein_files
+    dest: shame
+    source: archive.org
+    note: "Compiled court documents, flight logs, and related filings"
+
+  - id: jeffrey-epstein-files-full
+    dest: shame
+    source: archive.org
+    note: "Full document collection"
+
+  - id: jeffrey-epstein-part-22-of-22_20250227_2148
+    dest: shame
+    source: archive.org
+    note: "FBI documents — 22 parts, FOIA release"
+
+# ── Linux ISOs — Boot from bare metal ──────────────────────────────────
+# Every supported major version. Because knowledge needs an OS to run on.
+# Torrents staged to /mnt/nas-downloads/linux/torrents/ (separate qBT watch)
+
+isos:
+  # Debian — stable workhorse, offline-installable DVD
+  - torrent_url: "https://cdimage.debian.org/cdimage/archive/latest-oldstable/amd64/bt-dvd/debian-12.13.0-amd64-DVD-1.iso.torrent"
+    note: "Debian 12 Bookworm (oldstable) — LTS until 2028"
+
+  - torrent_url: "https://cdimage.debian.org/cdimage/release/current/amd64/bt-dvd/debian-13.4.0-amd64-DVD-1.iso.torrent"
+    note: "Debian 13 Trixie (stable) — current release"
+
+  # Rocky Linux — RHEL-compatible, enterprise/server
+  - torrent_url: "https://download.rockylinux.org/pub/rocky/8/isos/x86_64/Rocky-8.10-x86_64-minimal.torrent"
+    note: "Rocky 8.10 (RHEL 8 compatible) — supported until 2029"
+
+  - torrent_url: "https://download.rockylinux.org/pub/rocky/9/isos/x86_64/Rocky-9.7-x86_64-minimal.torrent"
+    note: "Rocky 9.7 (RHEL 9 compatible) — supported until 2032"
+
+  # Arch Linux — rolling release, build anything
+  - torrent_url: "https://mirror.rackspace.com/archlinux/iso/2026.03.01/archlinux-2026.03.01-x86_64.iso.torrent"
+    note: "Arch Linux 2026.03 — rolling release, latest snapshot"
+
+  # Tails — privacy OS, boots from USB (direct download, no official torrent)
+  - url: "https://download.tails.net/tails/stable/tails-amd64-7.5/tails-amd64-7.5.iso"
+    note: "Tails 7.5 — privacy-focused OS, boots from USB, no install needed"
+
+# ── Kiwix Platform Binaries ─────────────────────────────────────────────
+
+kiwix_platforms:
+  - desktop    # Linux AppImage + Windows zip
+  - android    # APK
+  - macos      # DMG
+  - tools      # kiwix-serve (Linux x86_64, aarch64, Windows)

@@ -1,0 +1,18 @@
+# Ark staging area configuration
+# Override any value with ARK_* environment variables
+
+staging_path: {{STAGING_PATH}}
+
+# Kiwix OPDS catalog
+catalog_url: https://library.kiwix.org/catalog/v2/entries
+catalog_max_age_hours: 24
+
+# Download settings
+download_method: http    # http | torrent
+download_base: https://download.kiwix.org
+
+# qBittorrent WebUI (for --method=torrent)
+qbittorrent:
+  url: ""
+  username: ""
+  password: ""

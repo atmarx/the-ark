@@ -1,0 +1,139 @@
+#!/usr/bin/env bash
+# ark — offline knowledge archive builder
+# https://github.com/xram/the-ark
+#
+# Usage: ark <command> [args...]
+#
+# Commands:
+#   init <path>          Initialize a staging area
+#   sync <loadout>       Download missing/outdated ZIMs for a loadout
+#   status <loadout>     Show inventory vs manifest
+#   freshen [loadout]    Check catalog for newer versions
+#   verify <loadout>     Verify SHA-256 checksums
+#   clone <loadout> <dest>  Copy loadout to drive/remote via rclone
+#   catalog <subcommand> Browse/search the Kiwix catalog
+#   help                 Show this help
+
+set -euo pipefail
+
+ARK_ROOT="$(cd "$(dirname "$0")" && pwd)"
+export ARK_ROOT
+
+# Load shared library
+source "$ARK_ROOT/lib/ark-common.sh"
+source "$ARK_ROOT/lib/ark-catalog.sh"
+source "$ARK_ROOT/lib/ark-state.sh"
+source "$ARK_ROOT/lib/ark-manifest.sh"
+source "$ARK_ROOT/lib/ark-download.sh"
+
+ark_usage() {
+    cat <<'EOF'
+   ░██    ░██                      ░███    ░█████████  ░██     ░██ 
+   ░██    ░██                     ░██░██   ░██     ░██ ░██    ░██  
+░████████ ░████████   ░███████   ░██  ░██  ░██     ░██ ░██   ░██   
+   ░██    ░██    ░██ ░██    ░██ ░█████████ ░█████████  ░███████    
+   ░██    ░██    ░██ ░█████████ ░██    ░██ ░██   ░██   ░██   ░██   
+   ░██    ░██    ░██ ░██        ░██    ░██ ░██    ░██  ░██    ░██  
+    ░████ ░██    ░██  ░███████  ░██    ░██ ░██     ░██ ░██     ░██ 
+
+  Offline Knowledge Archive Builder
+
+Usage: ark <command> [args...]
+
+Commands:
+  init <path>                Initialize a staging area
+  sync <loadout> [flags]     Download missing/outdated content
+  status <loadout>           Show inventory vs manifest
+  freshen [loadout]          Check for newer versions in catalog
+  verify <loadout>           Verify SHA-256 checksums of all files
+  clone <loadout> <dest>     Copy loadout to drive/remote via rclone
+  stamp <loadout> <device>   Health-check, format, and stamp a drive
+  publish <loadout>          Create .torrent files for custom content
+  seed <loadout> [--import]  Download Kiwix .torrents, import into qBittorrent
+  catalog search <query>     Search the Kiwix catalog
+  catalog list [flags]       List available ZIM files
+  catalog refresh            Force-refresh the catalog cache
+  help                       Show this help
+
+Flags for sync:
+  --refresh                  Force-refresh catalog before syncing
+  --method=http|torrent      Override download method
+
+Environment:
+  ARK_STAGING                Override staging area path
+  ARK_DOWNLOAD_METHOD        Override download method (http|torrent)
+  ARK_QBT_URL                qBittorrent WebUI URL
+  ARK_CATALOG_URL            Override OPDS catalog URL
+
+EOF
+}
+
+cmd="${1:-help}"
+shift || true
+
+case "$cmd" in
+    init)
+        source "$ARK_ROOT/cmd/ark-init.sh"
+        ark_init "$@"
+        ;;
+    sync)
+        ark_check_deps
+        source "$ARK_ROOT/cmd/ark-sync.sh"
+        ark_sync "$@"
+        ;;
+    status)
+        ark_check_deps
+        source "$ARK_ROOT/cmd/ark-status.sh"
+        ark_status "$@"
+        ;;
+    freshen)
+        ark_check_deps
+        source "$ARK_ROOT/cmd/ark-freshen.sh"
+        ark_freshen "$@"
+        ;;
+    verify)
+        ark_check_deps
+        source "$ARK_ROOT/cmd/ark-verify.sh"
+        ark_verify "$@"
+        ;;
+    clone)
+        ark_require_cmd rclone "cloning loadouts"
+        source "$ARK_ROOT/cmd/ark-clone.sh"
+        ark_clone "$@"
+        ;;
+    stamp)
+        ark_require_cmd rclone "cloning loadouts"
+        # sgdisk, smartctl, mkfs.exfat are in /usr/sbin — check with full path
+        for cmd in sgdisk smartctl mkfs.exfat; do
+            if ! command -v "$cmd" &>/dev/null && [[ ! -x "/usr/sbin/$cmd" ]]; then
+                ark_die "Required command '$cmd' not found"
+            fi
+        done
+        source "$ARK_ROOT/cmd/ark-stamp.sh"
+        ark_stamp "$@"
+        ;;
+    publish)
+        ark_require_cmd transmission-create "creating torrents"
+        source "$ARK_ROOT/cmd/ark-publish.sh"
+        ark_publish "$@"
+        ;;
+    seed)
+        ark_check_deps
+        source "$ARK_ROOT/cmd/ark-seed.sh"
+        ark_seed "$@"
+        ;;
+    catalog)
+        ark_check_deps
+        source "$ARK_ROOT/cmd/ark-catalog.sh"
+        ark_catalog_cmd "$@"
+        ;;
+    help|--help|-h)
+        ark_usage
+        ;;
+    *)
+        ark_error "Unknown command: $cmd"
+        echo
+        ark_usage
+        exit 1
+        ;;
+esac

@@ -1,0 +1,74 @@
+================================================================================
+                         THE KNOWLEDGE ARK
+                    Offline Human Knowledge Archive
+================================================================================
+
+Hello.
+
+This drive contains a curated snapshot of human knowledge as of {{DATE}}.
+
+Loadout: {{LOADOUT}}
+{{DESCRIPTION}}
+
+HOW TO USE THIS DRIVE
+---------------------
+
+1. Install Kiwix for your platform:
+   - Look in the kiwix/ directory on this drive
+   - Choose the right version for your system:
+     kiwix/linux/     - Linux (AppImage, just run it)
+     kiwix/windows/   - Windows
+     kiwix/macos/     - macOS
+     kiwix/android/   - Android (APK)
+     kiwix/serve/     - Server / Raspberry Pi (kiwix-serve)
+
+2. Open any .zim file from the zim/ directory using Kiwix.
+   Start with Wikipedia — it's the single most valuable file here.
+
+3. Everything works completely offline. No internet needed.
+
+WHAT'S ON THIS DRIVE
+--------------------
+
+zim/     - Compressed knowledge archives (readable with Kiwix)
+           Wikipedia, medical references, repair guides, textbooks,
+           programming courses, dictionaries, primary sources, and more.
+
+pdfs/    - Curated PDF collection: survival manuals, field medicine,
+           agriculture, construction, food preservation.
+
+kiwix/   - Kiwix reader software for all platforms.
+
+maps/    - Offline maps (if included in this loadout).
+
+SERVING ON A NETWORK
+--------------------
+
+To make this library available to everyone on your local network:
+
+    # Using the bundled kiwix-serve:
+    cd kiwix/serve/
+    ./kiwix-serve --port 8080 ../../zim/*.zim
+
+    # Or with Docker:
+    docker run -v /path/to/zim:/data -p 8080:80 kiwix/kiwix-serve '*.zim'
+
+Then open http://localhost:8080 in any browser on your network.
+
+A Raspberry Pi + this drive + a WiFi access point = an instant offline
+knowledge hotspot.
+
+ABOUT
+-----
+
+Built with "The Ark" — https://github.com/xram/the-ark
+Powered by Kiwix (https://kiwix.org), the open-source offline reader.
+
+The ZIM format is the standard for offline knowledge archiving, used by
+NGOs, deployed in schools without internet across Africa, and smuggled
+into countries where information is restricted.
+
+You don't need the internet to read any of this. That's the whole point.
+
+Good luck.
+================================================================================

@@ -1,0 +1,174 @@
+# mini.yml — "The Pocket Edition"
+# Everything that matters, no images, no Gutenberg.
+# Fits on a 240-250 GB SSD — perfect for old drives finding a new purpose.
+
+loadout: mini
+description: "The essential loadout — Wikipedia (text), medical, survival, programming, 3 languages"
+target_size_gb: 223
+
+zim:
+  # ── Core Knowledge (~48 GB) ─────────────────────────────────────
+
+  - name: wikipedia_en_all
+    flavour: nopic
+    tier: foundation
+    note: "Full English Wikipedia, all articles, no images — 47.6 GB vs 115 GB with images"
+
+  - name: wikipedia_en_simple_all
+    flavour: maxi
+    tier: foundation
+    note: "Simple English — images included, it's only 3 GB and great for kids"
+
+  # ── Medical (~4 GB) ─────────────────────────────────────────────
+
+  - name: wikipedia_en_medicine
+    flavour: maxi
+    tier: medical
+    note: "WikiMed — images matter for medical content, keep maxi"
+
+  - name: medlineplus.gov_en_all
+    tier: medical
+
+  # ── Practical Survival (~10 GB) ─────────────────────────────────
+
+  - name: ifixit_en_all
+    tier: survival
+    note: "iFixit — images matter for repair guides"
+
+  - name: wikibooks_en_all
+    flavour: maxi
+    tier: survival
+
+  - name: wikivoyage_en_all
+    flavour: maxi
+    tier: survival
+
+  # ── Reference (~9 GB) ──────────────────────────────────────────
+
+  - name: wiktionary_en_all
+    flavour: nopic
+    tier: reference
+
+  - name: wikiquote_en_all
+    flavour: maxi
+    tier: reference
+
+  # ── Practical Q&A (~8 GB) ──────────────────────────────────────
+
+  - name: diy.stackexchange.com_en_all
+    tier: practical
+
+  - name: gardening.stackexchange.com_en_all
+    tier: practical
+
+  - name: cooking.stackexchange.com_en_all
+    tier: practical
+
+  - name: electronics.stackexchange.com_en_all
+    tier: practical
+
+  - name: outdoors.stackexchange.com_en_all
+    tier: practical
+
+  - name: sustainability.stackexchange.com_en_all
+    tier: practical
+
+  - name: history.stackexchange.com_en_all
+    tier: practical
+
+  - name: law.stackexchange.com_en_all
+    tier: practical
+
+  - name: astronomy.stackexchange.com_en_all
+    tier: practical
+
+  - name: engineering.stackexchange.com_en_all
+    tier: practical
+
+  # ── Education & Tech (~4.5 GB) ─────────────────────────────────
+
+  - name: freecodecamp_en_all
+    tier: education
+
+  - name: phet_en_all
+    tier: education
+
+  - name: archlinux_en_all
+    flavour: maxi
+    tier: education
+
+  - name: superuser.com_en_all
+    tier: education
+
+  - prefix: devdocs_en_
+    tier: education
+
+  - name: openstreetmap-wiki_en_all
+    flavour: maxi
+    tier: reference
+
+  # ── Primary Sources (~18 GB) ───────────────────────────────────
+
+  - name: wikisource_en_all
+    flavour: maxi
+    tier: culture
+    note: "Constitutions, treaties, historical speeches, legislation"
+
+  # ── Multilingual Wikipedia nopic (~20 GB) ──────────────────────
+
+  - name: wikipedia_es_all
+    flavour: nopic
+    tier: multilingual
+    note: "Spanish — text only, 9.4 GB"
+
+  - name: wikipedia_zh_all
+    flavour: nopic
+    tier: multilingual
+    note: "Mandarin Chinese — text only, 11 GB"
+
+  # ── Stack Overflow (~75 GB) ────────────────────────────────────
+  # This is the swing item. At 75 GB it fills most of the remaining
+  # space but it's the most practically useful programming resource
+  # ever assembled. Comment it out if you need the space.
+
+  - name: stackoverflow.com_en_all
+    tier: programming
+    note: "75 GB — comment out if you need the space for other content"
+
+# ── PDFs ─────────────────────────────────────────────────────────
+
+pdfs:
+  - url: "https://hesperian.org/wp-content/uploads/pdf/en_wtnd_2022.pdf"
+    filename: "Where_There_Is_No_Doctor.pdf"
+
+  - url: "https://hesperian.org/wp-content/uploads/pdf/en_wtndentist_2022.pdf"
+    filename: "Where_There_Is_No_Dentist.pdf"
+
+# ── Linux ISOs — Boot from bare metal ──────────────────────────────────
+# Mini gets just Debian stable + Tails — most useful on a small drive
+
+isos:
+  - torrent_url: "https://cdimage.debian.org/cdimage/release/current/amd64/bt-dvd/debian-13.4.0-amd64-DVD-1.iso.torrent"
+    note: "Debian 13 Trixie (stable) — current release"
+
+  - url: "https://download.tails.net/tails/stable/tails-amd64-7.5/tails-amd64-7.5.iso"
+    note: "Tails 7.5 — privacy-focused OS, boots from USB, no install needed"
+
+# ── shame/ — Accountability Archives ────────────────────────────────────
+
+archives:
+  - id: compiled_epstein_files
+    dest: shame
+    source: archive.org
+    note: "Compiled court documents, flight logs, and related filings"
+
+  - id: jeffrey-epstein-part-22-of-22_20250227_2148
+    dest: shame
+    source: archive.org
+    note: "FBI documents — 22 parts, FOIA release"
+
+kiwix_platforms:
+  - desktop
+  - android
+  - macos
+  - tools
