@@ -11,7 +11,7 @@
 ark_download_get_sha256() {
     local meta4_url="$1"
     local meta4_content
-    meta4_content="$(curl -sL --fail "$meta4_url")" || {
+    meta4_content="$(ark_curl -sL --fail "$meta4_url")" || {
         ark_warn "Failed to fetch meta4: $meta4_url"
         echo ""
         return 1
@@ -71,10 +71,12 @@ ark_download_http() {
         -o "$dest"          # output file
         --fail              # fail on HTTP errors
         --progress-bar      # show progress
+        --connect-timeout "$ARK_CURL_CONNECT_TIMEOUT"
     )
 
-    if ! curl "${curl_args[@]}" "$url"; then
-        ark_error "Download failed: $url"
+    local max_retries="${ARK_DOWNLOAD_RETRIES:-3}"
+    if ! ark_retry "$max_retries" curl "${curl_args[@]}" "$url"; then
+        ark_error "Download failed after $max_retries attempts: $url"
         return 1
     fi
 

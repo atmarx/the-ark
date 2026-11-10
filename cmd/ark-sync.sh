@@ -66,9 +66,25 @@ ark_sync() {
     [[ -n "$description" ]] && ark_dim "  $description"
     echo
 
-    # Ensure staging dirs exist
     local staging
     staging="$(ark_staging_path)"
+
+    # Expansion packs (models only) skip the catalog and the drive README
+    if ark_manifest_is_pack "$manifest_file"; then
+        mkdir -p "$staging/$loadout"
+        local pack_ok=true
+        if (( $(ark_manifest_model_count "$manifest_file") > 0 )); then
+            ark_models_sync "$manifest_file" "$loadout" || pack_ok=false
+        fi
+        echo
+        local pack_size
+        pack_size="$(ark_state_total_size "$loadout/")"
+        ark_bold "Pack '$loadout': $(ark_human_bytes "$pack_size") / ${target_gb} GB"
+        $pack_ok
+        return
+    fi
+
+    # Ensure staging dirs exist
     mkdir -p "$staging/$loadout/zim"
     mkdir -p "$staging/$loadout/pdfs"
     mkdir -p "$staging/$loadout/kiwix"
@@ -141,16 +157,12 @@ ark_sync() {
                     echo
                     if [[ "$status" == "outdated" ]]; then
                         ark_info "Updating: $name ($flavour) -> $date"
-                        # Remove old version from state (the file on disk gets overwritten)
+                        # Forget the old version, but keep its file: home keeps
+                        # every build, and the catalog can't bring one back.
                         local old_key
                         old_key="$(ark_state_list "$loadout/zim/" | grep "^${loadout}/zim/${name}" | head -1 || true)"
                         if [[ -n "$old_key" ]]; then
-                            # Remove old file from disk
-                            local old_path="$staging/$old_key"
-                            if [[ -f "$old_path" ]]; then
-                                ark_dim "  Removing old version: $(basename "$old_path")"
-                                rm -f "$old_path"
-                            fi
+                            ark_dim "  Keeping old version: $(basename "$old_key")"
                             ark_state_remove "$old_key"
                         fi
                     fi
@@ -193,6 +205,12 @@ ark_sync() {
         source "$ARK_ROOT/lib/ark-kiwix.sh"
         # shellcheck disable=SC2086
         ark_kiwix_fetch "$staging/$loadout" $platforms
+    fi
+
+    # Handle models (a loadout can carry them directly, not just a pack)
+    if (( $(ark_manifest_model_count "$manifest_file") > 0 )); then
+        echo
+        ark_models_sync "$manifest_file" "$loadout" || true
     fi
 
     # Generate README

@@ -24,8 +24,11 @@ ark_status() {
     [[ -n "$description" ]] && ark_dim "  $description"
     echo
 
+    local zim_count
+    zim_count="$(ark_manifest_zim_count "$manifest_file")"
+
     # Check catalog
-    if ! ark_catalog_is_fresh; then
+    if (( zim_count > 0 )) && ! ark_catalog_is_fresh; then
         ark_warn "Catalog cache is stale or missing. Run 'ark sync $manifest_arg' to refresh."
         echo
     fi
@@ -34,17 +37,18 @@ ark_status() {
     staging="$(ark_staging_path)"
 
     # Resolve manifest
-    local resolution
-    resolution="$(ark_manifest_resolve "$manifest_file")"
+    local resolution=""
+    (( zim_count > 0 )) && resolution="$(ark_manifest_resolve "$manifest_file")"
 
     # Print table
-    printf "  ${C_BOLD}%-8s %-40s %-8s %10s  %s${C_RESET}\n" "STATUS" "NAME" "FLAVOUR" "SIZE" "DATE"
-    printf "  %-8s %-40s %-8s %10s  %s\n" "------" "----" "-------" "----" "----"
+    (( zim_count > 0 )) && printf "  ${C_BOLD}%-8s %-40s %-8s %10s  %s${C_RESET}\n" "STATUS" "NAME" "FLAVOUR" "SIZE" "DATE"
+    (( zim_count > 0 )) && printf "  %-8s %-40s %-8s %10s  %s\n" "------" "----" "-------" "----" "----"
 
     local total=0 ok=0 missing=0 outdated=0 unresolved=0
     local total_size=0 have_size=0 need_size=0
 
     while IFS=$'\t' read -r status name flavour meta4_url size date filename; do
+        [[ -z "$status" ]] && continue
         total=$(( total + 1 ))
         local size_human=""
         if [[ -n "$size" && "$size" != "0" ]]; then
@@ -100,10 +104,20 @@ ark_status() {
         ark_dim "  $pdf_have / $pdf_count PDFs present"
     fi
 
+    # Models
+    if (( $(ark_manifest_model_count "$manifest_file") > 0 )); then
+        echo
+        ark_info "Models: $(ark_manifest_model_count "$manifest_file") listed in manifest"
+        ark_models_status "$manifest_file" "$loadout"
+        have_size=$(( have_size + MODELS_HAVE ))
+        need_size=$(( need_size + MODELS_NEED ))
+        total_size=$(( total_size + MODELS_HAVE + MODELS_NEED ))
+    fi
+
     # Summary
     echo
     ark_bold "Summary"
-    echo "  Total entries:  $total"
+    (( zim_count > 0 )) && echo "  Total entries:  $total"
     (( ok > 0 ))         && echo -e "  ${C_GREEN}Up to date:   $ok${C_RESET}"
     (( missing > 0 ))    && echo -e "  ${C_RED}Missing:      $missing${C_RESET}"
     (( outdated > 0 ))   && echo -e "  ${C_YELLOW}Outdated:     $outdated${C_RESET}"

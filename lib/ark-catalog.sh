@@ -31,7 +31,7 @@ ark_catalog_fetch() {
         local url="${ARK_CATALOG_URL}?count=${page_size}&start=${start}"
         local page_file="$tmp_dir/page_${page}.xml"
 
-        if ! curl -sL --fail -o "$page_file" "$url"; then
+        if ! ark_curl -sL --fail -o "$page_file" "$url"; then
             rm -rf "$tmp_dir"
             ark_die "Failed to fetch catalog page at start=$start"
         fi

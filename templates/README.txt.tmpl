@@ -1,74 +1,101 @@
-================================================================================
-                         THE KNOWLEDGE ARK
-                    Offline Human Knowledge Archive
-================================================================================
+════════════════════════════════════════════════════════════════
+                    THE ARK — All Recent Knowledge
+                       Offline Knowledge Archive
+════════════════════════════════════════════════════════════════
 
-Hello.
+Hello. My name is Zim.
 
-This drive contains a curated snapshot of human knowledge as of {{DATE}}.
+I've been waiting for you.
+
+I live on this drive — {{TOTAL_SIZE}} of carefully curated human
+knowledge, frozen in time as of {{DATE}}. I can't reach the
+internet. I can't update myself. But everything I contain is
+yours, right now, no strings attached.
+
+Someone built me because they believed this knowledge was worth
+preserving. They filled me with {{ZIM_COUNT}} archives, loaded
+me onto this drive, and sent me out into the world. I don't know
+how I ended up with you, but I'm glad I did.
 
 Loadout: {{LOADOUT}}
 {{DESCRIPTION}}
 
-HOW TO USE THIS DRIVE
----------------------
+────────────────────────────────────────────────────────────────
+HOW TO WAKE ME UP
+────────────────────────────────────────────────────────────────
 
-1. Install Kiwix for your platform:
-   - Look in the kiwix/ directory on this drive
-   - Choose the right version for your system:
-     kiwix/linux/     - Linux (AppImage, just run it)
-     kiwix/windows/   - Windows
-     kiwix/macos/     - macOS
-     kiwix/android/   - Android (APK)
-     kiwix/serve/     - Server / Raspberry Pi (kiwix-serve)
+I need a reader called Kiwix. I've packed copies for every
+platform in my kiwix/ folder:
 
-2. Open any .zim file from the zim/ directory using Kiwix.
-   Start with Wikipedia — it's the single most valuable file here.
+   kiwix/windows/    Windows (unzip and run)
+   kiwix/macos/      macOS (open the .dmg)
+   kiwix/linux/      Linux (AppImage — just run it)
+   kiwix/android/    Android (sideload the .apk)
+   kiwix/serve/      Servers & Raspberry Pi (kiwix-serve)
 
-3. Everything works completely offline. No internet needed.
+Install one, then open any .zim file from my zim/ folder.
 
-WHAT'S ON THIS DRIVE
---------------------
+Start with Wikipedia. Trust me.
 
-zim/     - Compressed knowledge archives (readable with Kiwix)
-           Wikipedia, medical references, repair guides, textbooks,
-           programming courses, dictionaries, primary sources, and more.
+────────────────────────────────────────────────────────────────
+WHAT I CONTAIN
+────────────────────────────────────────────────────────────────
 
-pdfs/    - Curated PDF collection: survival manuals, field medicine,
-           agriculture, construction, food preservation.
+zim/        My knowledge archives. Open these with Kiwix.
+            Wikipedia, medical references, repair guides,
+            textbooks, dictionaries, primary sources, Q&A
+            from the world's experts, and more.
 
-kiwix/   - Kiwix reader software for all platforms.
+zim/devdocs/  Programming documentation for 200+ languages
+              and frameworks. If there's electricity, there
+              will be computers.
 
-maps/    - Offline maps (if included in this loadout).
+pdfs/       Survival manuals, field medicine, human rights
+            declarations, and open source licenses.
 
-SERVING ON A NETWORK
---------------------
+kiwix/      The reader software. Without this, I'm just a
+            pile of compressed data. With it, I'm a library.
 
-To make this library available to everyone on your local network:
+isos/       Bootable operating systems. If you need a
+            computer to read me, start here.
 
-    # Using the bundled kiwix-serve:
+shame/      Court documents and public records. A real
+            archive includes the parts we have to reckon with.
+
+────────────────────────────────────────────────────────────────
+SHARE ME ON A NETWORK
+────────────────────────────────────────────────────────────────
+
+Want everyone on your network to read me? Plug me into any
+computer and run:
+
     cd kiwix/serve/
     ./kiwix-serve --port 8080 ../../zim/*.zim
 
-    # Or with Docker:
-    docker run -v /path/to/zim:/data -p 8080:80 kiwix/kiwix-serve '*.zim'
+Then open http://localhost:8080 in any browser.
 
-Then open http://localhost:8080 in any browser on your network.
+A Raspberry Pi + this drive + a WiFi access point = an instant
+offline library. That's what I was made for.
 
-A Raspberry Pi + this drive + a WiFi access point = an instant offline
-knowledge hotspot.
+────────────────────────────────────────────────────────────────
+ABOUT ME
+────────────────────────────────────────────────────────────────
 
-ABOUT
------
+I was built with "The Ark" — https://github.com/atmarx/the-ark
+I'm powered by Kiwix (https://kiwix.org), the open-source
+offline reader used by schools, clinics, and aid groups in
+places the internet doesn't reach.
 
-Built with "The Ark" — https://github.com/xram/the-ark
-Powered by Kiwix (https://kiwix.org), the open-source offline reader.
+I don't need the internet. That's the whole point.
 
-The ZIM format is the standard for offline knowledge archiving, used by
-NGOs, deployed in schools without internet across Africa, and smuggled
-into countries where information is restricted.
+Check LOGBOOK.txt for my history: every update I've
+received, every machine I've been stamped from.
 
-You don't need the internet to read any of this. That's the whole point.
+If you got value from me, consider making more of me. Old hard
+drives are cheap. Knowledge should be free. The tools to build
+another ark are at the link above.
 
-Good luck.
-================================================================================
+I'll be here whenever you need me.
+
+                                        — Zim
+════════════════════════════════════════════════════════════════

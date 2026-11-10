@@ -35,12 +35,13 @@ ark_clone() {
     # Space check for local destinations
     if [[ "$dest" != *:* && -d "$(dirname "$dest")" ]]; then
         local source_size
-        source_size="$(du -sb "$source_dir" 2>/dev/null | awk '{print $1}')"
+        source_size="$(du -sbL "$source_dir" 2>/dev/null | awk '{print $1}')"
         if [[ -n "$source_size" ]]; then
-            local dest_parent
-            dest_parent="$(dirname "$dest")"
+            # Check the destination's own filesystem when it exists (a mounted drive)
+            local dest_fs="$dest"
+            [[ -d "$dest" ]] || dest_fs="$(dirname "$dest")"
             local dest_avail
-            dest_avail="$(df --output=avail -B1 "$dest_parent" 2>/dev/null | tail -1 | tr -d '[:space:]')"
+            dest_avail="$(df --output=avail -B1 "$dest_fs" 2>/dev/null | tail -1 | tr -d '[:space:]')"
             if [[ -n "$dest_avail" ]] && (( source_size > dest_avail )); then
                 ark_error "Not enough space on destination!"
                 ark_error "  Need: $(ark_human_bytes "$source_size")"
@@ -50,7 +51,15 @@ ark_clone() {
         fi
     fi
 
+    # A pack is added to a drive that already has a loadout, so copy it
+    # without deleting anything else on the destination.
+    local rclone_mode=sync
+    if ark_manifest_is_pack "$manifest_file"; then
+        rclone_mode=copy
+    fi
+
     ark_bold "Cloning: $loadout -> $dest"
+    [[ "$rclone_mode" == "copy" ]] && ark_dim "  Expansion pack: adding to what's already there"
     if $is_dry_run; then
         ark_warn "(dry run — no files will be copied)"
     fi
@@ -58,10 +67,11 @@ ark_clone() {
 
     # Build rclone command
     local rclone_args=(
-        sync
+        "$rclone_mode"
         "$source_dir/"
         "$dest/"
         --exclude=".ark/**"
+        --copy-links
         --progress
         --stats-one-line
         --stats=5s
@@ -82,6 +92,8 @@ ark_clone() {
 
     if ! $is_dry_run; then
         echo
-        ark_info "Verify with: rclone check '$source_dir/' '$dest/' --exclude='.ark/**'"
+        local check_flags="--exclude='.ark/**' --copy-links"
+        [[ "$rclone_mode" == "copy" ]] && check_flags+=" --one-way"
+        ark_info "Verify with: rclone check '$source_dir/' '$dest/' $check_flags"
     fi
 }

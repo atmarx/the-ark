@@ -102,7 +102,7 @@ EOF
             continue
         fi
 
-        if curl -sL --fail -o "$torrent_file" "$torrent_url"; then
+        if ark_curl -sL --fail -o "$torrent_file" "$torrent_url"; then
             downloaded=$(( downloaded + 1 ))
             torrent_files+=("$torrent_file")
         else
@@ -139,7 +139,7 @@ EOF
             fi
 
             ark_dim "  Fetching: $id"
-            if curl -sL --fail -o "$torrent_file" "$torrent_url"; then
+            if ark_curl -sL --fail -o "$torrent_file" "$torrent_url"; then
                 arch_downloaded=$(( arch_downloaded + 1 ))
                 torrent_files+=("$torrent_file")
             else
@@ -184,7 +184,7 @@ EOF
                 fi
 
                 ark_dim "  Fetching: $fname"
-                if curl -sL --fail -o "$torrent_file" "$torrent_url"; then
+                if ark_curl -sL --fail -o "$torrent_file" "$torrent_url"; then
                     iso_downloaded=$(( iso_downloaded + 1 ))
                     torrent_files+=("$torrent_file")
                 else
@@ -227,7 +227,7 @@ EOF
                 fi
 
                 ark_info "  Direct download: $fname (no torrent available)"
-                if curl -L --fail --progress-bar -o "$dest_file" "$url"; then
+                if curl --connect-timeout "$ARK_CURL_CONNECT_TIMEOUT" -L --fail --progress-bar -o "$dest_file" "$url"; then
                     iso_direct=$(( iso_direct + 1 ))
                 else
                     ark_warn "  Failed: $fname"
@@ -264,7 +264,7 @@ EOF
 
         if [[ -n "$ARK_QBT_USER" ]]; then
             local login_resp
-            login_resp="$(curl -sL -c "$cookie_jar" \
+            login_resp="$(ark_curl -sL -c "$cookie_jar" \
                 "${ARK_QBT_URL}/api/v2/auth/login" \
                 -d "username=${ARK_QBT_USER}" \
                 -d "password=${ARK_QBT_PASS}" 2>&1)"
@@ -282,8 +282,9 @@ EOF
             local paused_flag="false"
             $qbt_paused && paused_flag="true"
 
-            local resp
-            resp="$(curl -sL -b "$cookie_jar" \
+            local http_code
+            http_code="$(ark_curl -s -b "$cookie_jar" \
+                -o /dev/null -w '%{http_code}' \
                 "${ARK_QBT_URL}/api/v2/torrents/add" \
                 -F "torrents=@${torrent_file}" \
                 -F "savepath=${zim_dir}" \
@@ -292,10 +293,10 @@ EOF
                 -F "root_folder=false" \
                 -F "skip_checking=false" 2>&1)"
 
-            if [[ "$resp" == *"Ok"* || "$resp" == *"ok"* || -z "$resp" ]]; then
+            if [[ "$http_code" == "200" ]]; then
                 imported=$(( imported + 1 ))
             else
-                ark_warn "  Failed to import: $fname ($resp)"
+                ark_warn "  Failed to import: $fname (HTTP $http_code)"
                 import_failed=$(( import_failed + 1 ))
             fi
         done

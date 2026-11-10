@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 # ark — offline knowledge archive builder
-# https://github.com/xram/the-ark
+# https://github.com/atmarx/the-ark
 #
 # Usage: ark <command> [args...]
 #
@@ -11,6 +11,7 @@
 #   freshen [loadout]    Check catalog for newer versions
 #   verify <loadout>     Verify SHA-256 checksums
 #   clone <loadout> <dest>  Copy loadout to drive/remote via rclone
+#   fetch-data           Mirror the Data Liberation Project dataset bucket
 #   catalog <subcommand> Browse/search the Kiwix catalog
 #   help                 Show this help
 
@@ -25,6 +26,7 @@ source "$ARK_ROOT/lib/ark-catalog.sh"
 source "$ARK_ROOT/lib/ark-state.sh"
 source "$ARK_ROOT/lib/ark-manifest.sh"
 source "$ARK_ROOT/lib/ark-download.sh"
+source "$ARK_ROOT/lib/ark-models.sh"
 
 ark_usage() {
     cat <<'EOF'
@@ -46,10 +48,14 @@ Commands:
   status <loadout>           Show inventory vs manifest
   freshen [loadout]          Check for newer versions in catalog
   verify <loadout>           Verify SHA-256 checksums of all files
+  inspect <mount> [--record] Compare an old Ark with the catalog (read-only)
+  payloads <loadout>...      Publish loadouts for Za Wiper's Wipe + Load
   clone <loadout> <dest>     Copy loadout to drive/remote via rclone
   stamp <loadout> <device>   Health-check, format, and stamp a drive
+                             (--pack=deep-thought adds the LLM pack)
   publish <loadout>          Create .torrent files for custom content
   seed <loadout> [--import]  Download Kiwix .torrents, import into qBittorrent
+  fetch-data [--dry-run]     Mirror Data Liberation Project dataset bucket
   catalog search <query>     Search the Kiwix catalog
   catalog list [flags]       List available ZIM files
   catalog refresh            Force-refresh the catalog cache
@@ -64,6 +70,9 @@ Environment:
   ARK_DOWNLOAD_METHOD        Override download method (http|torrent)
   ARK_QBT_URL                qBittorrent WebUI URL
   ARK_CATALOG_URL            Override OPDS catalog URL
+  ARK_MODELS_SOURCE          Local GGUF library to link models from
+  ARK_DLP_BUCKET_URL         Override DLP CDN bucket URL (fetch-data)
+  ARK_REPO_URL               Where stamp clones the-ark from (default: GitHub)
 
 EOF
 }
@@ -96,6 +105,16 @@ case "$cmd" in
         source "$ARK_ROOT/cmd/ark-verify.sh"
         ark_verify "$@"
         ;;
+    inspect)
+        ark_check_deps
+        source "$ARK_ROOT/cmd/ark-inspect.sh"
+        ark_inspect "$@"
+        ;;
+    payloads)
+        ark_check_deps
+        source "$ARK_ROOT/cmd/ark-payloads.sh"
+        ark_payloads "$@"
+        ;;
     clone)
         ark_require_cmd rclone "cloning loadouts"
         source "$ARK_ROOT/cmd/ark-clone.sh"
@@ -121,6 +140,12 @@ case "$cmd" in
         ark_check_deps
         source "$ARK_ROOT/cmd/ark-seed.sh"
         ark_seed "$@"
+        ;;
+    fetch-data)
+        ark_require_cmd jq "fetch-data (URL encoding)"
+        ark_require_cmd xmlstarlet "fetch-data (S3 listing)"
+        source "$ARK_ROOT/cmd/ark-fetch-data.sh"
+        ark_fetch_data "$@"
         ;;
     catalog)
         ark_check_deps

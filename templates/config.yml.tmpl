@@ -4,7 +4,7 @@
 staging_path: {{STAGING_PATH}}
 
 # Kiwix OPDS catalog
-catalog_url: https://library.kiwix.org/catalog/v2/entries
+catalog_url: https://opds.library.kiwix.org/catalog/v2/entries
 catalog_max_age_hours: 24
 
 # Download settings
@@ -16,3 +16,8 @@ qbittorrent:
   url: ""
   username: ""
   password: ""
+
+# Existing GGUF library to link models from instead of downloading them
+# (expansion packs with a models: section).  Files must match the manifest's
+# sha256.  Leave empty to always download from Hugging Face.
+models_source: ""

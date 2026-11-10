@@ -1,6 +1,6 @@
 # Kiwix Ecosystem Reference Guide
 
-A practical reference for working with Kiwix, ZIM files, and the OPDS catalog — everything you need to build and maintain offline knowledge archives.
+A reference for Kiwix, ZIM files, and the OPDS catalog: what you need to build and maintain offline archives.
 
 ---
 
@@ -8,7 +8,7 @@ A practical reference for working with Kiwix, ZIM files, and the OPDS catalog �
 
 Kiwix is an open-source offline content reader. It reads `.zim` archives — highly compressed, self-contained packages of web content — and serves them through a browser-like interface with full-text search. One app, runs on everything from a Raspberry Pi to a phone.
 
-It was designed for environments with no internet: schools in rural Africa, refugee camps, countries with restricted information access. It's been deployed by NGOs worldwide and even smuggled into North Korea on USB drives.
+It was built for places without reliable internet: schools, clinics, refugee camps, and countries that restrict what people can read.  NGOs have deployed it around the world.
 
 **Key properties:**
 - Completely offline — no internet required after download
@@ -51,7 +51,7 @@ Not all ZIM files have flavours. When present:
 | `mini`  | Condensed selection of articles |
 | `nopic` | Full articles but no images (much smaller) |
 
-Wikipedia ZIMs typically come in all three. Many other sources (Stack Exchange, iFixit, freeCodeCamp) have no flavour — they're just the complete archive.
+Wikipedia ZIMs typically come in all three. Many other sources (Stack Exchange, iFixit, freeCodeCamp) have no flavour; there's just the one complete archive.
 
 ### What's Inside a ZIM
 
@@ -66,18 +66,20 @@ A ZIM file contains:
 
 ## The OPDS Catalog
 
-Kiwix publishes a machine-readable catalog of all available ZIM files using the [OPDS](https://opds.io/) (Open Publication Distribution System) standard — an Atom XML feed designed for ebook/content distribution.
+Kiwix publishes a machine-readable catalog of all available ZIM files using [OPDS](https://opds.io/) (Open Publication Distribution System), an Atom XML feed format built for distributing ebooks and similar content.
 
 ### Endpoints
 
 | Endpoint | Purpose |
 |----------|---------|
-| `https://library.kiwix.org/catalog/v2/entries` | Full catalog (paginated) |
-| `https://library.kiwix.org/catalog/v2/entries?q=<query>` | Search |
-| `https://library.kiwix.org/catalog/v2/entries?count=N&start=M` | Pagination |
-| `https://library.kiwix.org/catalog/v2/languages` | Available languages |
-| `https://library.kiwix.org/catalog/v2/categories` | Available categories |
-| `https://library.kiwix.org/catalog/root.xml` | Legacy catalog root |
+| `https://opds.library.kiwix.org/catalog/v2/entries` | Full catalog (paginated) |
+| `https://opds.library.kiwix.org/catalog/v2/entries?q=<query>` | Search |
+| `https://opds.library.kiwix.org/catalog/v2/entries?count=N&start=M` | Pagination |
+| `https://opds.library.kiwix.org/catalog/v2/languages` | Available languages |
+| `https://opds.library.kiwix.org/catalog/v2/categories` | Available categories |
+| `https://opds.library.kiwix.org/catalog/root.xml` | Legacy catalog root |
+
+The old host, `library.kiwix.org/catalog/`, redirects here (HTTP 301), so use `curl -L`.
 
 ### Catalog Entry Structure
 
@@ -116,7 +118,7 @@ Each entry in the OPDS feed looks like this (Atom XML):
 
 ### Pagination
 
-The catalog contains ~3400+ entries. The API paginates:
+The catalog has about 3,600 entries (October 2026).  The API paginates:
 
 ```
 GET /catalog/v2/entries?count=100&start=0    → entries 0-99
@@ -319,10 +321,12 @@ xmlstarlet sel -t -m "//entry" -v "category" -n catalog-cache.xml | sort -u
 
 2. **The meta4 mirrors are real.** If the main Kiwix download server is slow, fetch the meta4 first and use one of the mirror URLs directly.
 
-3. **ZIM files are content-addressed by date.** The filename includes `YYYY-MM`, so you can have multiple versions coexisting. Old versions are safe to delete once the new one is verified.
+3. **ZIM files are versioned by date.** The filename includes `YYYY-MM`, so several versions can sit side by side.  Delete an old version only after the new one verifies, and after checking the new one didn't lose content (compare `articleCount` in the catalog).
 
 4. **Full-text search is opt-in.** The `_ftindex:yes` tag in the catalog tells you if the ZIM includes a search index. `maxi` flavour always has it; `nopic` and `mini` usually do too.
 
 5. **Stack Exchange ZIMs don't have a flavour.** They're just `{site}_en_all_{date}.zim`. The catalog's `<flavour>` element is empty.
 
 6. **Kiwix can serve multiple ZIMs simultaneously.** Point kiwix-serve at a directory of ZIM files and it presents them all through a single web interface with unified search.
+
+7. **The catalog only lists the newest build.** Older builds often stay on `download.kiwix.org` for months after the catalog moves on.  Browse the category directory (for example `https://download.kiwix.org/zim/wikisource/`) if a new build turns out worse than the last one.

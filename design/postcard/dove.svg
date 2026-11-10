@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Ark colophon mark: a carrier dove bearing a book.
+     Side-profile, perched with wings slightly spread as if just landed.
+     Single-ink (oxblood #6b1f18) on cream.
+     Drawn as woodcut silhouette with reversed cream detail lines. -->
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 260 240">
+
+  <g fill="#6b1f18" stroke="none">
+
+    <!-- TAIL: short fan of three pointed feathers, at the rear-left -->
+    <path d="M 78,120 L 20,96 L 56,120 Z"/>
+    <path d="M 78,128 L 14,128 L 56,128 Z"/>
+    <path d="M 78,136 L 20,160 L 56,138 Z"/>
+
+    <!-- BODY: rounded oval (the classic pigeon breast) -->
+    <ellipse cx="118" cy="128" rx="58" ry="34"/>
+
+    <!-- NECK: curves up from shoulder to head -->
+    <path d="M 150,108
+             C 158,88 176,78 190,76
+             C 202,76 210,85 206,96
+             L 192,102
+             L 164,118 Z"/>
+
+    <!-- HEAD: round cranium sitting forward on the neck -->
+    <circle cx="198" cy="74" r="13"/>
+
+    <!-- BEAK: compact triangle -->
+    <path d="M 210,74 L 224,70 L 212,80 Z"/>
+
+    <!-- UPPER WING (folded on body, hinted as a shape rising over the back).
+         A curved comma with scalloped trailing edge for feather tips. -->
+    <path d="M 148,108
+             C 126,96 92,96 70,108
+             C 90,98 115,98 140,110
+             C 130,118 115,124 100,128
+             C 118,126 136,120 150,110 Z"/>
+
+    <!-- LEGS: short stems ending in simple splayed talons -->
+    <rect x="102" y="155" width="3.5" height="12"/>
+    <path d="M 99,168 L 106,168 L 104,172 L 103,168 L 101,172 L 103,168 L 107,172 Z"/>
+    <rect x="134" y="155" width="3.5" height="12"/>
+    <path d="M 131,168 L 138,168 L 136,172 L 135,168 L 133,172 L 135,168 L 139,172 Z"/>
+
+    <!-- BOOK: held beneath.  Plain filled rectangle. -->
+    <rect x="68" y="172" width="102" height="50"/>
+
+  </g>
+
+  <!-- Cream cut-outs rendered on top (appear as reverse-etched detail) -->
+  <g fill="#f4ead8" stroke="none">
+
+    <!-- Eye (a pinhole on the head) -->
+    <circle cx="201" cy="72" r="1.8"/>
+
+    <!-- Beak gap (cream notch separating mandibles) -->
+    <path d="M 212,76 L 222,72.5 L 213,76.5 Z"/>
+
+    <!-- WING FEATHER LINES (scalloped strokes across the wing silhouette) -->
+    <path d="M 144,106 C 128,102 105,102 82,108" stroke="#f4ead8" stroke-width="1.2" fill="none"/>
+    <path d="M 142,112 C 125,112 108,116 95,122" stroke="#f4ead8" stroke-width="1"   fill="none"/>
+    <path d="M 138,118 C 122,122 108,128 100,130" stroke="#f4ead8" stroke-width="0.9" fill="none"/>
+
+    <!-- Short cream hatches at wing leading edge (shoulder joint) -->
+    <line x1="148" y1="112" x2="146" y2="120" stroke="#f4ead8" stroke-width="0.9"/>
+    <line x1="152" y1="114" x2="150" y2="122" stroke="#f4ead8" stroke-width="0.9"/>
+
+    <!-- Tail feather separations (two cream lines in the tail fan) -->
+    <line x1="68" y1="118" x2="34" y2="110" stroke="#f4ead8" stroke-width="0.8"/>
+    <line x1="68" y1="138" x2="34" y2="146" stroke="#f4ead8" stroke-width="0.8"/>
+
+    <!-- BOOK SPINE: thick cream bar down the middle -->
+    <rect x="117" y="172" width="4" height="50"/>
+
+    <!-- BOOK COVER FRAMES (embossed inset rectangles, left page and right page) -->
+    <rect x="72"  y="176" width="41" height="1.2"/>
+    <rect x="72"  y="217" width="41" height="1.2"/>
+    <rect x="72"  y="176" width="1.2" height="42"/>
+    <rect x="112" y="176" width="1.2" height="42"/>
+
+    <rect x="125" y="176" width="41" height="1.2"/>
+    <rect x="125" y="217" width="41" height="1.2"/>
+    <rect x="125" y="176" width="1.2" height="42"/>
+    <rect x="165" y="176" width="1.2" height="42"/>
+
+    <!-- PAGE RULES (cream horizontal bars — hint of printed text) -->
+    <rect x="77" y="184" width="32" height="0.9"/>
+    <rect x="77" y="190" width="32" height="0.9"/>
+    <rect x="77" y="196" width="32" height="0.9"/>
+    <rect x="77" y="202" width="32" height="0.9"/>
+    <rect x="77" y="208" width="32" height="0.9"/>
+
+    <rect x="129" y="184" width="33" height="0.9"/>
+    <rect x="129" y="190" width="33" height="0.9"/>
+    <rect x="129" y="196" width="33" height="0.9"/>
+    <rect x="129" y="202" width="33" height="0.9"/>
+    <rect x="129" y="208" width="33" height="0.9"/>
+
+  </g>
+
+</svg>

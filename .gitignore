@@ -1,18 +1,23 @@
-# Files to exclude when publishing to GitHub
-# Usage: cp .github/.gitignore-github .gitignore (on the github branch)
-
-# Claude Code project context (contains internal URLs and infra details)
-CLAUDE.md
-.claude/
-memory/
-MEMORY.md
-
-# Woodpecker CI (Gitea-specific, won't work on GitHub)
-.woodpecker.yml
-.woodpecker/
-
-# Internal infrastructure details
+# Staging area state (lives on NAS, not in repo)
+.ark/
 .ark-staging
-docs/OPGUIDE.md
-docs/ewaste-postcard.md
-docs/torrents-as-resilience.md
+
+# Python venv if needed
+.venv/
+__pycache__/
+*.pyc
+
+# OS junk
+.DS_Store
+Thumbs.db
+
+# Editor
+*.swp
+*.swo
+*~
+
+# Vendored build tooling (typst binary for design/)
+design/.tools/
+
+# Design preview renders (the .pdf is the deliverable)
+design/**/preview.png

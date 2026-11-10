@@ -26,7 +26,7 @@ ark_init() {
 staging_path: $staging_path
 
 # Kiwix OPDS catalog
-catalog_url: https://library.kiwix.org/catalog/v2/entries
+catalog_url: https://opds.library.kiwix.org/catalog/v2/entries
 catalog_max_age_hours: 24
 
 # Download settings

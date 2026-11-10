@@ -6,8 +6,8 @@ into a ZIM file. This guide covers the two main scenarios:
 1. **Crawling a live website** into a ZIM
 2. **Converting a local static site** (mkdocs, Hugo, Jekyll, etc.) into a ZIM
 
-Once created, drop the ZIM into your staging area's `zim/` folder and
-it will be included in the next stamp.
+Once it's built, see [Adding Your ZIM to the Ark](#adding-your-zim-to-the-ark)
+below.  The short version: `ark clone` picks it up, `ark stamp` doesn't yet.
 
 ## Option 1: Crawl a Live Website (zimit)
 
@@ -43,6 +43,19 @@ This will crawl the site and produce a ZIM in `/tmp/zim-output/`.
 --publisher "the-ark"    # Your name/org
 ```
 
+### Example: Crawling a Herbalism Reference
+
+```bash
+docker run -v /tmp/zim-output:/output ghcr.io/openzim/zimit \
+    --url "https://rjwhelan.co.nz/" \
+    --name "rjwhelan_herbs" \
+    --lang "eng" \
+    --title "Richard Whelan - Medical Herbalism" \
+    --description "Herbs A-Z, conditions, constitutional medicine" \
+    --creator "Richard Whelan" \
+    --publisher "the-ark" \
+    --output /output/
+```
 
 ### Tips for Crawling
 
@@ -52,11 +65,11 @@ This will crawl the site and produce a ZIM in `/tmp/zim-output/`.
   need explicit permission from the author.
 - **Test with a small limit first** (`--limit 50`) to make sure the
   crawl is finding the right pages.
-- **Ancient HTML is fine.** zimit handles hand-crafted HTML from 2005
-  better than most modern JS-heavy sites.
-- **Watch for wacky URL structures.** Some sites use spaces in directory
-  names or inconsistent naming. zimit usually handles this, but check
-  the output.
+- **Old HTML is fine.** zimit handles hand-written HTML from 2005 better
+  than many modern JavaScript-heavy sites.
+- **Watch for odd URL structures.** Some sites use spaces in directory
+  names or inconsistent naming.  zimit usually copes, but check the
+  output.
 
 ## Option 2: Convert a Local Static Site (zimwriterfs)
 
@@ -95,7 +108,7 @@ make html             # output in _build/html/
 ```bash
 zimwriterfs \
     --welcome "index.html" \
-    --favicon "favicon.ico" \
+    --illustration "illustration.png" \
     --language "eng" \
     --title "My Knowledge Base" \
     --description "Offline reference for ..." \
@@ -106,9 +119,9 @@ zimwriterfs \
     ./my_knowledge_base.zim
 ```
 
-The arguments in order:
-1. Path to the build output directory (the folder containing `index.html`)
-2. Path for the output ZIM file
+The two positional arguments are the build output directory (the folder
+containing `index.html`) and the ZIM file to write.  `--illustration` must
+be a 48x48 PNG; older zim-tools releases called this `--favicon`.
 
 ### Example: Converting a mkdocs Site
 
@@ -120,7 +133,7 @@ mkdocs build
 # Convert to ZIM
 zimwriterfs \
     --welcome "index.html" \
-    --favicon "img/favicon.ico" \
+    --illustration "img/illustration.png" \
     --language "eng" \
     --title "Keep Your Teeth" \
     --description "Dental self-care guide" \
@@ -134,7 +147,7 @@ zimwriterfs \
 ### Tips for Static Sites
 
 - **Use the build output, not the source.** Point zimwriterfs at `site/`,
-  `public/`, or `_site/` — the compiled HTML, not the markdown source.
+  `public/`, or `_site/`: the compiled HTML, not the markdown source.
 - **Check your welcome page.** It must be relative to the root of the
   directory you're converting. Usually `index.html`.
 - **Include assets.** Make sure CSS, JS, and images are in the build
@@ -158,39 +171,28 @@ team add it to the official Kiwix library. This means:
    - **Title** and **description**
    - **Language** (ISO code)
    - **License** (must be CC, public domain, or author permission)
-3. The openZIM team adds it to their zimfarm
-4. The ZIM appears in the OPDS catalog within 24-48 hours
-5. It gets refreshed automatically from then on
+3. If it's accepted, the openZIM team sets up a recipe on their zimfarm
+4. The ZIM shows up in the catalog after its first build, and is rebuilt
+   on a schedule from then on
 
-This is the best path for content that should be preserved long-term.
-One submission, replicated to every offline library worldwide.
+Expect this to take a while; it's a volunteer project.  It's still the
+best path for content that should outlive any one person's copy.
 
 ## Adding Your ZIM to the Ark
 
 Once you have a ZIM file:
 
-### Quick (Manual)
-
-Drop it into your staging area:
+Copy it into the loadout's folder in your staging area:
 
 ```bash
-cp my_custom_content.zim /mnt/nas-ark/medium/zim/
+cp my_custom_content.zim "$ARK_STAGING/medium/zim/"
 ```
 
-It will be included in the next `ark stamp`.
-
-### Proper (Manifest)
-
-Add a `custom_zims` entry to your loadout's manifest:
-
-```yaml
-# In manifests/medium.yml (or mega.yml, mini.yml)
-
-# After the zim: section
-custom_zims:
-  - file: "keepyourteeth_en_all.zim"
-    note: "Dental self-care guide (custom build)"
-```
+`ark clone` copies everything in the loadout folder, so the ZIM goes along.
+`ark stamp` currently copies only the ZIMs its manifest resolves to in the
+Kiwix catalog, so a custom ZIM is left off a stamped drive.  Manifest
+support for custom ZIMs is planned; until then, use `ark clone` for drives
+that need them.
 
 ### Verify It Works
 
@@ -212,6 +214,7 @@ Follow the Kiwix naming pattern for consistency:
 
 Examples:
 - `keepyourteeth_en_all_2026-03.zim`
+- `rjwhelan_herbs_en_all_2026-03.zim`
 - `my_garden_notes_en_all_2026-03.zim`
 
 ## Size Estimates
@@ -224,5 +227,5 @@ Examples:
 | Site with lots of images | 2-10x the text-only size |
 | Full mkdocs project | 10-100 MB |
 
-ZIM files compress well — expect roughly 50-70% of the original
+ZIM files compress well; expect roughly 50-70% of the original
 site size.

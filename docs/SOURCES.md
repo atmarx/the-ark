@@ -1,94 +1,121 @@
 # Sources
 
-Complete content inventory for each loadout. All content is public domain,
-Creative Commons, or openly licensed.
+What's on each loadout.  Everything here is public domain, Creative
+Commons, or openly licensed, and each source keeps its own license.
 
-Legend: **m** = mini (240 GB) | **M** = medium (500 GB) | **G** = mega (1 TB)
+Sizes are from the Kiwix catalog as of October 2026, in decimal GB.  They
+drift by a few percent with every new build.
+
+Legend: **m** = mini (250 GB drive) | **M** = medium (500 GB) | **G** = mega (1 TB)
 
 ## Wikipedia & Wikimedia
 
 | Source | Variant | Size | m | M | G | Notes |
 |--------|---------|------|:-:|:-:|:-:|-------|
-| Wikipedia EN | maxi (with images) | ~110 GB | | x | x | 6.9 million articles, full images |
-| Wikipedia EN | nopic (text only) | ~47.6 GB | x | | | Same articles, no images |
-| Simple English Wikipedia | maxi | ~3.1 GB | x | x | x | 10-year-old reading level, ESL-friendly |
-| WikiMed (medical) | maxi | ~2.0 GB | x | x | x | 65,000+ curated medical articles |
-| Wiktionary EN | nopic | ~8.1 GB | x | x | x | Complete dictionary, etymologies, pronunciations |
-| Wikibooks EN | maxi | ~5.0 GB | x | x | x | Open textbooks — cooking, engineering, languages |
-| Wikisource EN | maxi | ~17.9 GB | x | x | x | Constitutions, treaties, historical speeches |
-| Wikiquote EN | maxi | ~0.9 GB | x | x | x | Quotations with attribution |
-| Wikivoyage EN | maxi | ~1.0 GB | x | x | x | World travel guide / gazetteer |
-| Wikipedia ES | maxi | ~38.2 GB | | | x | Spanish — full with images |
-| Wikipedia ES | nopic | ~9.4 GB | x | | | Spanish — text only |
-| Wikipedia ZH | maxi | ~24.2 GB | | | x | Mandarin Chinese — full with images |
-| Wikipedia ZH | nopic | ~11.0 GB | x | | | Mandarin Chinese — text only |
-| Wikipedia FR | maxi | ~50.1 GB | | | x | French |
-| Wikipedia DE | maxi | ~48.7 GB | | | x | German |
-| Wikipedia RU | maxi | ~38.1 GB | | | x | Russian |
-| Wikipedia JA | maxi | ~25.4 GB | | | x | Japanese |
-| Wikipedia PT | maxi | ~17.9 GB | | | x | Portuguese |
-| Wikipedia AR | maxi | ~17.2 GB | | | x | Arabic |
-| Wikipedia HI | maxi | ~1.8 GB | | | x | Hindi |
+| Wikipedia EN | maxi (with images) | ~127 GB | | x | x | About 7 million articles, with images |
+| Wikipedia EN | nopic (text only) | ~53 GB | x | | | Same articles, no images |
+| Simple English Wikipedia | maxi | ~3.1 GB | x | x | x | Plain-language Wikipedia, good for kids and English learners |
+| WikiMed (medical) | maxi | ~2.2 GB | x | x | x | 65,000+ medical articles |
+| Wiktionary EN | nopic | ~9.2 GB | x | x | x | Dictionary with etymologies and pronunciations |
+| Wikibooks EN | maxi | ~6.2 GB | x | x | x | Open textbooks: cooking, engineering, languages |
+| Wikisource EN | maxi | ~19.7 GB | | x | x | Constitutions, treaties, historical speeches (see note below) |
+| Wikisource EN | nopic | ~12.1 GB | x | | | Same texts, no scans |
+| Wikiquote EN | maxi | ~1.0 GB | x | x | x | Quotations with sources |
+| Wikivoyage EN | maxi | ~1.1 GB | x | x | x | Travel guide and gazetteer |
+| Wikiversity EN | maxi | ~2.5 GB | | x | x | Open courses and learning projects |
+| Vikidia EN | maxi | ~0.1 GB | | x | x | Encyclopedia written for ages 8 to 13 |
+| Wikipedia ES | maxi | ~40.8 GB | | | x | Spanish |
+| Wikipedia ZH | maxi | ~26.6 GB | | | x | Chinese |
+| Wikipedia FR | maxi | ~55.4 GB | | | x | French |
+| Wikipedia DE | maxi | ~52.4 GB | | | x | German |
+| Wikipedia RU | maxi | ~41.0 GB | | | x | Russian |
+| Wikipedia JA | maxi | ~30.8 GB | | | x | Japanese |
+| Wikipedia PT | maxi | ~20.6 GB | | | x | Portuguese |
+| Wikipedia AR | maxi | ~19.1 GB | | | x | Arabic |
+| Wikipedia HI | maxi | ~1.9 GB | | | x | Hindi |
+
+**Wikisource note:** the September 2026 build dropped about 80% of its
+articles.  The Ark keeps the last full builds (maxi 2026-05, nopic
+2026-08) until that's fixed upstream.
 
 ## Books & Literature
 
 | Source | Size | m | M | G | Notes |
 |--------|------|:-:|:-:|:-:|-------|
-| Project Gutenberg EN | ~206 GB | | x | x | 70,000+ public domain books |
+| Project Gutenberg EN | ~221 GB | | x | x | 70,000+ public domain books |
 
 ## Medical & Health
 
 | Source | Size | m | M | G | Notes |
 |--------|------|:-:|:-:|:-:|-------|
-| MedlinePlus (NLM) | ~1.8 GB | x | x | x | U.S. National Library of Medicine |
-| Where There Is No Doctor | ~11 MB | x | x | x | Hesperian, 2025 edition (PDF) |
-| Where There Is No Dentist | ~5 MB | x | x | x | Hesperian, 2024 edition (PDF) |
+| MedlinePlus | ~1.9 GB | x | x | x | U.S. National Library of Medicine |
+| WikEM | ~0.4 GB | x | x | x | Emergency medicine reference, written by ER clinicians |
+| Military medicine (FAS) | ~0.1 GB | x | x | x | Field and trauma care manuals |
+| Where There Is No Doctor | ~11 MB | x | x | x | Hesperian (PDF) |
+| Where There Is No Dentist | ~5 MB | x | x | x | Hesperian (PDF) |
+| LibreTexts Medicine | ~1.2 GB | | x | x | Anatomy, physiology, nursing, pharmacology |
 
 ## Practical & Survival
 
 | Source | Size | m | M | G | Notes |
 |--------|------|:-:|:-:|:-:|-------|
-| iFixit | ~3.3 GB | x | x | x | Step-by-step repair guides, illustrated |
+| iFixit | ~3.6 GB | x | x | x | Illustrated step-by-step repair guides |
+| zimgit: medicine, water, food, post-disaster, knots | ~0.9 GB | x | x | x | Five small curated libraries |
+| Ready.gov | ~2.4 GB | | x | x | FEMA's emergency planning guides |
+| US Army publications | ~8.2 GB | | x | x | Field manuals: survival, first aid, water, shelter |
+| Appropedia | ~0.6 GB | | x | x | Appropriate technology and low-cost building |
+| Energypedia | ~0.8 GB | | x | x | Off-grid energy: solar, biogas, micro-hydro, cookstoves |
+| Low-tech Magazine | ~0.7 GB | | x | x | Older and simpler ways to do things |
 
 ## Stack Exchange Q&A
 
 | Source | Size | m | M | G | Notes |
 |--------|------|:-:|:-:|:-:|-------|
-| Stack Overflow | ~74.9 GB | x | | x | 23 million programming Q&As |
-| SuperUser | ~3.7 GB | x | | x | Consumer hardware & software |
-| ServerFault | ~1.5 GB | | | x | System administration |
-| AskUbuntu | ~2.6 GB | | | x | Ubuntu Linux support |
-| Unix & Linux | ~1.2 GB | | | x | Unix/Linux Q&A |
-| DIY Home Improvement | ~1.9 GB | x | x | x | Home repair |
+| Stack Overflow | ~115 GB | x | | x | About 24 million programming questions |
+| Super User | ~4.0 GB | x | | x | Computer hardware and software |
+| Server Fault | ~1.6 GB | | | x | System administration |
+| Ask Ubuntu | ~2.8 GB | | | x | Ubuntu Linux |
+| Unix & Linux | ~1.3 GB | | | x | Unix and Linux |
+| DIY Home Improvement | ~2.1 GB | x | x | x | Home repair |
+| Electronics | ~4.2 GB | x | x | x | Building and repairing circuits |
 | Gardening | ~0.9 GB | x | x | x | Growing food |
-| Cooking (Seasoned Advice) | ~0.2 GB | x | x | x | Preparing food |
-| Electronics | ~3.8 GB | x | x | x | Building and repairing circuits |
-| Engineering | ~0.2 GB | x | x | x | Applied physics for infrastructure |
-| Physics | ~1.7 GB | | x | x | Understanding the physical world |
-| Math | ~6.9 GB | | x | x | The language of the universe |
-| Chemistry | ~0.4 GB | | x | x | Understanding the material world |
-| Biology | ~0.4 GB | | x | x | Understanding the living world |
-| Sustainability | ~26 MB | x | x | x | Living off-grid |
-| Outdoors | ~0.1 GB | x | x | x | Wilderness survival |
-| Astronomy | ~0.2 GB | x | x | x | Navigating by stars |
-| History | ~0.3 GB | x | x | x | Understanding how we got here |
-| Law | ~0.2 GB | x | x | x | How civilizations organize rules |
+| Mechanics | ~0.3 GB | x | x | x | Vehicle maintenance and repair |
+| Engineering | ~0.3 GB | x | x | x | Applied engineering |
+| Cooking | ~0.2 GB | x | x | x | Preparing food |
+| Astronomy | ~0.2 GB | x | x | x | The night sky |
+| History | ~0.3 GB | x | x | x | History |
+| Law | ~0.2 GB | x | x | x | Law |
+| Outdoors | ~0.1 GB | x | x | x | Wilderness skills |
+| Amateur Radio | ~0.1 GB | x | x | x | Radio communication |
+| Sustainability | ~30 MB | x | x | x | Living with less |
+| Math | ~7.4 GB | | x | x | Mathematics |
+| Physics | ~1.8 GB | | x | x | Physics |
+| Chemistry | ~0.4 GB | | x | x | Chemistry |
+| Biology | ~0.4 GB | | x | x | Biology |
+| Bicycles | ~0.5 GB | | x | x | Bicycle repair and riding |
+| Raspberry Pi | ~0.3 GB | | x | x | Small, low-power computers |
+| Arduino | ~0.3 GB | | x | x | Microcontrollers |
+| 3D Printing | ~0.1 GB | | x | x | Making parts |
+| Woodworking | ~0.1 GB | | x | x | Woodworking |
+| Pets | ~0.1 GB | | x | x | Animal care |
+| Arts & Crafts, Homebrewing, Lifehacks, Medical Sciences, Parenting | ~0.3 GB | | x | x | Five small sites |
 
 ## Programming & Technology
 
 | Source | Size | m | M | G | Notes |
 |--------|------|:-:|:-:|:-:|-------|
-| DevDocs | ~0.6 GB | x | x | x | 223 ZIMs — docs for 100+ languages/frameworks |
-| freeCodeCamp | ~7.5 MB | x | x | x | Full programming curriculum |
-| Arch Wiki | ~30 MB | x | | x | The best Linux documentation |
-| OpenStreetMap Wiki | ~1.0 GB | x | | x | Mapping reference |
+| DevDocs | ~0.7 GB | x | x | x | 231 small archives covering programming languages and frameworks |
+| freeCodeCamp | ~8 MB | x | x | x | Programming curriculum |
+| Arch Wiki | ~40 MB | x | | x | Linux documentation |
+| OpenStreetMap Wiki | ~1.2 GB | x | | x | Mapping reference |
 
 ## Education
 
 | Source | Size | m | M | G | Notes |
 |--------|------|:-:|:-:|:-:|-------|
-| PhET Simulations | ~0.1 GB | x | x | x | Interactive science sims for kids |
-| TED Talks | ~10.5 GB | | | x | All talks, multilingual, video |
+| PhET Simulations | ~0.1 GB | x | x | x | Interactive science simulations |
+| LibreTexts (9 libraries) | ~8.8 GB | | x | x | College textbooks: biology, chemistry, physics, math, statistics, engineering, geosciences, trades, K-12 |
+| TED Talks | ~91 GB | | | x | Talks with subtitles in many languages (video) |
 
 ## Accountability Archives (shame/)
 
@@ -102,28 +129,47 @@ Legend: **m** = mini (240 GB) | **M** = medium (500 GB) | **G** = mega (1 TB)
 
 | ISO | Size | m | M | G | Notes |
 |-----|------|:-:|:-:|:-:|-------|
-| Debian 12 Bookworm DVD | ~3.7 GB | | x | x | Oldstable, LTS until 2028 |
-| Debian 13 Trixie DVD | ~3.7 GB | x | x | x | Current stable |
-| Rocky 8.10 minimal | ~1.8 GB | | x | x | RHEL 8 compatible, until 2029 |
-| Rocky 9.7 minimal | ~1.8 GB | | x | x | RHEL 9 compatible, until 2032 |
-| Arch Linux 2026.03 | ~1.1 GB | | x | x | Rolling release |
-| Tails 7.5 | ~1.4 GB | x | x | x | Privacy OS, boots from USB |
+| Debian 13 DVD | ~4 GB | x | x | x | Current stable, installs offline |
+| Debian 12 DVD | ~4 GB | | x | x | Oldstable, supported until 2028 |
+| Rocky 10 minimal | ~2 GB | | x | x | RHEL 10 compatible |
+| Rocky 9 minimal | ~2 GB | | x | x | RHEL 9 compatible, supported until 2032 |
+| Arch Linux | ~1.4 GB | | x | x | Rolling release, latest snapshot |
+| Tails | ~1.9 GB | x | x | x | Privacy OS, boots from USB |
 
 ## Kiwix Platform Binaries
 
 | Binary | m | M | G | Notes |
 |--------|:-:|:-:|:-:|-------|
-| kiwix-desktop (Windows x64) | x | x | x | .zip installer |
+| Kiwix JS Electron (Windows, Linux) | x | x | x | Desktop reader: .zip and AppImage |
 | kiwix-macos | x | x | x | .dmg |
-| kiwix-tools (Linux x86_64) | x | x | x | kiwix-serve, static musl build |
+| kiwix-tools (Linux x86_64) | x | x | x | kiwix-serve, static build |
 | kiwix-tools (Linux aarch64) | x | x | x | ARM64 / Raspberry Pi |
 | kiwix-tools (Windows x64) | x | x | x | .zip |
-| kiwix (Android) | x | x | x | .apk sideload |
+| kiwix (Android) | x | x | x | .apk |
+
+## Deep Thought (LLM expansion pack)
+
+Added on top of any loadout with `--pack=deep-thought`.  All Apache 2.0, all
+stock releases.  See [Deep Thought](deep-thought.md).
+
+| Model | Size | RAM | Notes |
+|-------|------|-----|-------|
+| Gemma 4 E2B | ~4.3 GB | 6 GB | Google's 4-bit build, reads images |
+| Gemma 4 E4B | ~6.1 GB | 8 GB | Google's 4-bit build, reads images |
+| gpt-oss 20B | ~12.1 GB | 16 GB | OpenAI, text only, strong at reasoning |
+| Gemma 4 26B-A4B | ~15.6 GB | 24 GB | Mixture of experts, quick on a CPU, reads images |
+| Gemma 4 31B | ~18.9 GB | 32 GB | Dense, best with a GPU, reads images |
+| Qwen3.8 27B | ~17.4 GB | 32 GB | Alibaba, dense, best with a GPU, reads images |
+| llama.cpp | ~0.15 GB | | Windows, macOS, and Linux builds (MIT) |
 
 ## Totals
 
-| Loadout | ZIM Files | Total Size | Est. Printed Pages |
-|---------|-----------|------------|-------------------|
-| **mini** | ~248 | ~200 GB | ~38 million |
-| **medium** | ~250 | ~384 GB | ~55 million |
-| **mega** | ~267 | ~809 GB | ~81 million |
+ZIM archives only, including the 231 DevDocs archives.  ISOs, PDFs, and
+the shame/ folder add roughly 10 to 20 GB per loadout.
+
+| Loadout | ZIM files | ZIM size |
+|---------|-----------|----------|
+| **mini** | 266 | ~224 GB |
+| **medium** | 295 | ~445 GB |
+| **mega** | 312 | ~950 GB |
+| **deep-thought** (pack) | 6 models | ~74 GB |

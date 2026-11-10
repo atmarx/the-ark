@@ -4,7 +4,7 @@
 # Targets a 1 TB drive (~930 GB usable).
 
 loadout: mega
-description: "The full medium loadout plus Stack Overflow, 8 Wikipedia languages, TED, and more"
+description: "The full medium loadout plus Stack Overflow, Wikipedia in 9 more languages, TED, and more"
 target_size_gb: 930
 
 zim:
@@ -18,7 +18,7 @@ zim:
     flavour: maxi
     tier: foundation
 
-  - name: wikipedia_en_simple_all
+  - name: wikipedia_en-simple_all
     flavour: maxi
     tier: foundation
 
@@ -89,6 +89,117 @@ zim:
   - name: law.stackexchange.com_en_all
     tier: practical
 
+  # ── Tier 3b: Field Manual (~14 GB) ──────────────────────────────────
+  # Added 2026-10-08.  Small files with a lot of value per byte.
+
+  # WikEM is gone: not in the catalog (2026-11-01) or anywhere on the mirror
+  # (val, 2026-11-07), and no Ark we've inspected ever carried it.  Restore
+  # the entry if it comes back.  — Zim
+  # - name: wikem_en_all
+  #   flavour: maxi
+  #   tier: field
+  #   note: "WikEM: emergency medicine reference written by ER clinicians"
+
+  - name: irp.fas.org_en_military-medicine
+    tier: field
+    note: "Military medicine manuals: field and trauma care"
+
+  - name: zimgit-medicine_en
+    tier: field
+    note: "Curated austere-medicine library"
+
+  - name: zimgit-water_en
+    tier: field
+    note: "Finding, purifying, and storing water"
+
+  - name: zimgit-food-preparation_en
+    tier: field
+    note: "Food preparation and preservation"
+
+  - name: zimgit-post-disaster_en
+    tier: field
+    note: "Post-disaster recovery guides"
+
+  - name: zimgit-knots_en
+    tier: field
+    note: "Knots"
+
+  - name: www.ready.gov_en
+    tier: field
+    note: "FEMA's Ready.gov: emergency plans, kits, and the first 72 hours"
+
+  - name: armypubs_en_all
+    tier: field
+    note: "US Army publications: field manuals for survival, first aid, water, shelter"
+
+  - name: appropedia_en_all
+    flavour: maxi
+    tier: field
+    note: "Appropriate technology: building what you need with what you have"
+
+  - name: energypedia_en_all
+    flavour: maxi
+    tier: field
+    note: "Off-grid energy: solar, biogas, micro-hydro, cookstoves"
+
+  - name: solar.lowtechmagazine.com_mul_all
+    tier: field
+    note: "Low-tech Magazine: older and simpler ways to do things"
+
+  # ── Tier 3c: More Stack Exchange, hands-on trades (~2 GB) ───────────
+
+  - name: ham.stackexchange.com_en_all
+    tier: practical
+    note: "Amateur radio"
+
+  - name: mechanics.stackexchange.com_en_all
+    tier: practical
+    note: "Motor vehicle maintenance and repair"
+
+  - name: bicycles.stackexchange.com_en_all
+    tier: practical
+    note: "Bicycle repair and riding"
+
+  - name: woodworking.stackexchange.com_en_all
+    tier: practical
+    note: "Woodworking"
+
+  - name: crafts.stackexchange.com_en_all
+    tier: practical
+    note: "Arts and crafts"
+
+  - name: homebrew.stackexchange.com_en_all
+    tier: practical
+    note: "Homebrewing and fermentation"
+
+  - name: medicalsciences.stackexchange.com_en_all
+    tier: practical
+    note: "Medical sciences Q&A"
+
+  - name: parenting.stackexchange.com_en_all
+    tier: practical
+    note: "Parenting"
+
+  - name: pets.stackexchange.com_en_all
+    tier: practical
+    note: "Animal care"
+
+  - name: lifehacks.stackexchange.com_en_all
+    tier: practical
+    note: "Lifehacks"
+
+  - name: 3dprinting.stackexchange.com_en_all
+    tier: practical
+    note: "3D printing: making replacement parts"
+
+  - name: raspberrypi.stackexchange.com_en_all
+    tier: practical
+    note: "Raspberry Pi: small, low-power computers"
+
+  - name: arduino.stackexchange.com_en_all
+    tier: practical
+    note: "Arduino: microcontrollers for sensors, pumps, and automation"
+
   # ── Tier 4: Education & Culture (from medium) ───────────────────
 
   - name: freecodecamp_en_all
@@ -101,6 +212,10 @@ zim:
     flavour: nopic
     tier: education
 
+  # HOLD: the 2026-09 build lost 81% of its articles (4.6M -> 858k).  Keep the
+  # last full builds, which are on download.kiwix.org but no longer in the catalog:
+  # maxi 2026-05 (19.7 GB), nopic 2026-08 (12.1 GB).  Don't let freshen/sync take
+  # a newer one until the article count comes back.  — Zim, 2026-10-13
   - name: wikisource_en_all
     flavour: maxi
     tier: education
@@ -108,6 +223,59 @@ zim:
   - name: wikiquote_en_all
     flavour: maxi
     tier: education
+
+  # ── Tier 4b: Textbooks (~12 GB) ──────────────────────────────────────
+  # Added 2026-10-08.
+
+  - name: libretexts.org_en_med
+    tier: education
+    note: "LibreTexts Medicine: anatomy, physiology, nursing, pharmacology"
+
+  - name: libretexts.org_en_bio
+    tier: education
+    note: "LibreTexts Biology"
+
+  - name: libretexts.org_en_chem
+    tier: education
+    note: "LibreTexts Chemistry"
+
+  - name: libretexts.org_en_phys
+    tier: education
+    note: "LibreTexts Physics"
+
+  - name: libretexts.org_en_math
+    tier: education
+    note: "LibreTexts Mathematics"
+
+  - name: libretexts.org_en_stats
+    tier: education
+    note: "LibreTexts Statistics"
+
+  - name: libretexts.org_en_eng
+    tier: education
+    note: "LibreTexts Engineering"
+
+  - name: libretexts.org_en_geo
+    tier: education
+    note: "LibreTexts Geosciences: soil, water, weather"
+
+  - name: libretexts.org_en_workforce
+    tier: education
+    note: "LibreTexts Workforce: HVAC, welding, construction, electrical"
+
+  - name: libretexts.org_en_k12
+    tier: education
+    note: "LibreTexts K-12"
+
+  - name: wikiversity_en_all
+    flavour: maxi
+    tier: education
+    note: "Wikiversity: open courses and learning projects"
+
+  - name: vikidia_en_all
+    flavour: maxi
+    tier: education
+    note: "Vikidia: encyclopedia written for ages 8 to 13"
 
   # ── Tier 5: Reference (from medium) ─────────────────────────────
 
@@ -122,7 +290,7 @@ zim:
 
   - name: stackoverflow.com_en_all
     tier: mega
-    note: "The single most useful programming resource ever assembled"
+    note: "About 24 million programming questions and answers"
 
   # ── Additional Stack Exchange sites (~9 GB) ──────────────────────
 
@@ -147,7 +315,7 @@ zim:
   - name: archlinux_en_all
     flavour: maxi
     tier: mega
-    note: "The best Linux documentation on the internet, period"
+    note: "Arch Wiki: thorough Linux documentation"
 
   # ── Multilingual Wikipedias (~237 GB) ────────────────────────────
 
@@ -221,23 +389,23 @@ pdfs:
 # ── Linux ISOs — Boot from bare metal ──────────────────────────────────
 
 isos:
-  - torrent_url: "https://cdimage.debian.org/cdimage/archive/latest-oldstable/amd64/bt-dvd/debian-12.13.0-amd64-DVD-1.iso.torrent"
+  - torrent_url: "https://cdimage.debian.org/cdimage/archive/latest-oldstable/amd64/bt-dvd/debian-12.15.0-amd64-DVD-1.iso.torrent"
     note: "Debian 12 Bookworm (oldstable) — LTS until 2028"
 
-  - torrent_url: "https://cdimage.debian.org/cdimage/release/current/amd64/bt-dvd/debian-13.4.0-amd64-DVD-1.iso.torrent"
+  - torrent_url: "https://cdimage.debian.org/cdimage/release/current/amd64/bt-dvd/debian-13.7.0-amd64-DVD-1.iso.torrent"
     note: "Debian 13 Trixie (stable) — current release"
 
-  - torrent_url: "https://download.rockylinux.org/pub/rocky/8/isos/x86_64/Rocky-8.10-x86_64-minimal.torrent"
-    note: "Rocky 8.10 (RHEL 8 compatible) — supported until 2029"
+  - torrent_url: "https://download.rockylinux.org/pub/rocky/10/isos/x86_64/Rocky-10.2-x86_64-minimal.torrent"
+    note: "Rocky 10.2 (RHEL 10 compatible) — supported until 2035"
 
-  - torrent_url: "https://download.rockylinux.org/pub/rocky/9/isos/x86_64/Rocky-9.7-x86_64-minimal.torrent"
-    note: "Rocky 9.7 (RHEL 9 compatible) — supported until 2032"
+  - torrent_url: "https://download.rockylinux.org/pub/rocky/9/isos/x86_64/Rocky-9.8-x86_64-minimal.torrent"
+    note: "Rocky 9.8 (RHEL 9 compatible) — supported until 2032"
 
-  - torrent_url: "https://mirror.rackspace.com/archlinux/iso/2026.03.01/archlinux-2026.03.01-x86_64.iso.torrent"
-    note: "Arch Linux 2026.03 — rolling release, latest snapshot"
+  - torrent_url: "https://archlinux.org/releng/releases/2026.10.01/torrent/"
+    note: "Arch Linux 2026.10 — rolling release, latest snapshot"
 
-  - url: "https://download.tails.net/tails/stable/tails-amd64-7.5/tails-amd64-7.5.iso"
-    note: "Tails 7.5 — privacy-focused OS, boots from USB, no install needed"
+  - url: "https://download.tails.net/tails/stable/tails-amd64-7.14/tails-amd64-7.14.iso"
+    note: "Tails 7.14 — privacy-focused OS, boots from USB, no install needed"
 
 # ── shame/ — Accountability Archives ────────────────────────────────────
 

@@ -80,6 +80,28 @@ ark_staging_path() {
     ark_die "No staging path configured. Run 'ark init <path>' or set ARK_STAGING."
 }
 
+# Resolve the sites directory. Priority:
+#   1. ARK_SITES_DIR env var
+#   2. <staging>/sites/
+ark_sites_dir() {
+    if [[ -n "${ARK_SITES_DIR:-}" ]]; then
+        echo "$ARK_SITES_DIR"
+        return
+    fi
+    echo "$(ark_staging_path)/sites"
+}
+
+# Resolve the data directory. Priority:
+#   1. ARK_DATA_DIR env var
+#   2. <staging>/data/
+ark_data_dir() {
+    if [[ -n "${ARK_DATA_DIR:-}" ]]; then
+        echo "$ARK_DATA_DIR"
+        return
+    fi
+    echo "$(ark_staging_path)/data"
+}
+
 # Load staging config (config.yml from .ark/)
 # Sets global variables: ARK_CATALOG_URL, ARK_CATALOG_MAX_AGE, ARK_DOWNLOAD_METHOD, etc.
 ark_load_config() {
@@ -91,7 +113,7 @@ ark_load_config() {
         ark_die "Config not found at $config — is the staging area initialized?"
     fi
 
-    ARK_CATALOG_URL="${ARK_CATALOG_URL:-$(yq -r '.catalog_url // "https://library.kiwix.org/catalog/v2/entries"' "$config")}"
+    ARK_CATALOG_URL="${ARK_CATALOG_URL:-$(yq -r '.catalog_url // "https://opds.library.kiwix.org/catalog/v2/entries"' "$config")}"
     ARK_CATALOG_MAX_AGE="${ARK_CATALOG_MAX_AGE:-$(yq -r '.catalog_max_age_hours // 24' "$config")}"
     ARK_DOWNLOAD_METHOD="${ARK_DOWNLOAD_METHOD:-$(yq -r '.download_method // "http"' "$config")}"
     ARK_DOWNLOAD_BASE="${ARK_DOWNLOAD_BASE:-$(yq -r '.download_base // "https://download.kiwix.org"' "$config")}"
@@ -103,6 +125,10 @@ ark_load_config() {
 
     export ARK_CATALOG_URL ARK_CATALOG_MAX_AGE ARK_DOWNLOAD_METHOD ARK_DOWNLOAD_BASE
     export ARK_QBT_URL ARK_QBT_USER ARK_QBT_PASS
+
+    # Local GGUF library for expansion packs (optional)
+    ARK_MODELS_SOURCE="${ARK_MODELS_SOURCE:-$(yq -r '.models_source // ""' "$config")}"
+    export ARK_MODELS_SOURCE
 }
 
 # ---------------------------------------------------------------------------
@@ -116,6 +142,7 @@ ark_resolve_manifest() {
 
     # If it's already a path to a file
     if [[ -f "$name" ]]; then
+        ark_manifest_validate "$name" || ark_die "Manifest validation failed: $name"
         echo "$name"
         return
     fi
@@ -123,6 +150,7 @@ ark_resolve_manifest() {
     # Check repo manifests dir
     local repo_manifest="$ARK_ROOT/manifests/${name}.yml"
     if [[ -f "$repo_manifest" ]]; then
+        ark_manifest_validate "$repo_manifest" || ark_die "Manifest validation failed: $repo_manifest"
         echo "$repo_manifest"
         return
     fi
@@ -150,7 +178,7 @@ ark_loadout_dir() {
 ark_require_cmd() {
     local cmd="$1"
     local purpose="${2:-}"
-    if ! command -v "$cmd" &>/dev/null; then
+    if ! command -v "$cmd" &>/dev/null && [[ ! -x "/usr/sbin/$cmd" ]]; then
         if [[ -n "$purpose" ]]; then
             ark_die "Required command '$cmd' not found ($purpose)"
         else
@@ -165,4 +193,114 @@ ark_check_deps() {
     ark_require_cmd yq "YAML manifest parsing"
     ark_require_cmd xmlstarlet "OPDS catalog parsing"
     ark_require_cmd sha256sum "checksum verification"
+}
+
+# ---------------------------------------------------------------------------
+# Network helpers
+# ---------------------------------------------------------------------------
+
+# curl wrapper with default timeouts — use for metadata/API calls.
+# For large file downloads, use curl directly with --connect-timeout only.
+ARK_CURL_CONNECT_TIMEOUT="${ARK_CURL_CONNECT_TIMEOUT:-30}"
+ARK_CURL_MAX_TIME="${ARK_CURL_MAX_TIME:-300}"
+
+ark_curl() {
+    curl --connect-timeout "$ARK_CURL_CONNECT_TIMEOUT" \
+         --max-time "$ARK_CURL_MAX_TIME" \
+         "$@"
+}
+
+# Retry wrapper — retries a command up to N times with backoff.
+# Usage: ark_retry 3 curl -sL --fail -o /tmp/foo http://example.com/foo
+ark_retry() {
+    local max_retries="$1"; shift
+    local attempt=1
+    while (( attempt <= max_retries )); do
+        if "$@"; then
+            return 0
+        fi
+        if (( attempt < max_retries )); then
+            ark_warn "  Attempt $attempt/$max_retries failed, retrying in $(( attempt * 5 ))s..."
+            sleep $(( attempt * 5 ))
+        fi
+        attempt=$(( attempt + 1 ))
+    done
+    return 1
+}
+
+# ---------------------------------------------------------------------------
+# Privilege escalation
+# ---------------------------------------------------------------------------
+
+# Route privileged commands through the sudo helper script.
+# The helper validates arguments (blocks NVMe, restricts dd to if=/dev/zero).
+# Falls back to plain sudo if the helper isn't configured in sudoers.
+ark_sudo() {
+    local helper="$ARK_ROOT/lib/ark-sudo-helper.sh"
+    if [[ -x "$helper" ]] && sudo -n "$helper" --check 2>/dev/null; then
+        sudo "$helper" "$@"
+    else
+        sudo "$@"
+    fi
+}
+
+# ---------------------------------------------------------------------------
+# Command initialization helper
+# ---------------------------------------------------------------------------
+
+# Common init sequence for commands that take a loadout argument.
+# Sets: MANIFEST_FILE, LOADOUT, STAGING in caller's scope.
+ark_init_command() {
+    local usage_cmd="$1"
+    local manifest_arg="${2:-}"
+
+    if [[ -z "$manifest_arg" ]]; then
+        ark_die "Usage: ark $usage_cmd <loadout|manifest.yml>"
+    fi
+
+    ark_load_config
+    ark_state_init
+
+    MANIFEST_FILE="$(ark_resolve_manifest "$manifest_arg")"
+    LOADOUT="$(ark_manifest_loadout "$MANIFEST_FILE")"
+    STAGING="$(ark_staging_path)"
+}
+
+# ---------------------------------------------------------------------------
+# Manifest validation
+# ---------------------------------------------------------------------------
+
+# Validate a manifest file has required fields and well-formed entries.
+# Returns 0 if valid, non-zero on errors (prints warnings).
+ark_manifest_validate() {
+    local manifest="$1"
+    local errors=0
+
+    # Check required top-level keys
+    for key in loadout description target_size_gb; do
+        local val
+        val="$(yq -r ".$key // \"\"" "$manifest" 2>/dev/null)" || val=""
+        if [[ -z "$val" || "$val" == "null" ]]; then
+            ark_error "Manifest missing required key: $key"
+            errors=$(( errors + 1 ))
+        fi
+    done
+
+    # Check each ZIM entry has name or prefix
+    local count
+    count="$(yq -r '.zim | length // 0' "$manifest" 2>/dev/null)" || count=0
+    local i
+    for (( i = 0; i < count; i++ )); do
+        local name prefix
+        name="$(yq -r ".zim[$i].name // \"\"" "$manifest" 2>/dev/null)" || name=""
+        prefix="$(yq -r ".zim[$i].prefix // \"\"" "$manifest" 2>/dev/null)" || prefix=""
+        [[ "$name" == "null" ]] && name=""
+        [[ "$prefix" == "null" ]] && prefix=""
+        if [[ -z "$name" && -z "$prefix" ]]; then
+            ark_error "ZIM entry $i has neither 'name' nor 'prefix'"
+            errors=$(( errors + 1 ))
+        fi
+    done
+
+    return "$errors"
 }

@@ -1,0 +1,157 @@
+# deep-thought.yml — the LLM expansion pack
+# Local language models plus llama.cpp, laid on top of a stamped drive:
+#   ark sync deep-thought
+#   ark stamp mega /dev/sdX --pack=deep-thought      # new drive
+#   ark clone deep-thought /media/THE-ARK            # existing drive
+#
+# Stock releases only: first-party weights, or a straight quantization of
+# them.  No fine-tunes, merges, distills, or decensored variants.  Every file
+# is pinned to a Hugging Face revision and checked against its sha256.
+#
+# A model paraphrases; a ZIM cites.  The pack is a way into the library, not
+# a replacement for it.
+#
+# ~75 GB (69 GiB).  Mega plus this pack fits a 2 TB drive with room to spare.
+
+loadout: deep-thought
+pack: true
+description: "Local language models and llama.cpp, for any drive with 75 GB free"
+target_size_gb: 75
+
+# ram_gb: smallest total system RAM the model is comfortable in.
+# auto:   the launcher picks the largest auto model that fits.  The two dense
+#         ~30B models are opt-in because they're slow without a GPU.
+models:
+  - id: gemma-4-e2b
+    name: "Gemma 4 E2B"
+    ram_gb: 6
+    auto: true
+    license: apache-2.0
+    repo: google/gemma-4-E2B-it-qat-q4_0-gguf
+    revision: 675cff42a74c774d6cb76f76d8eacb49b48c9b93
+    note: "Google's own 4-bit build.  Reads images.  For old laptops, phones, and a Raspberry Pi 5."
+    files:
+      - file: gemma-4-E2B_q4_0-it.gguf
+        size: 3349516256
+        sha256: fa401b55b07ee70a54c6dae3903c783a6e65064312529ea57175cb5f8dec6634
+      - file: gemma-4-E2B-it-mmproj.gguf
+        role: mmproj
+        size: 986833664
+        sha256: 021059cce659fe7f9170d5599761d7bbaf644b798dab9503aca30dc43e6beb14
+
+  - id: gemma-4-e4b
+    name: "Gemma 4 E4B"
+    ram_gb: 8
+    auto: true
+    license: apache-2.0
+    repo: google/gemma-4-E4B-it-qat-q4_0-gguf
+    revision: 4b4a2c1d584be7264f87aac328a1bc739ce81b6c
+    note: "Google's own 4-bit build.  Reads images.  The default on most laptops."
+    files:
+      - file: gemma-4-E4B_q4_0-it.gguf
+        size: 5154941280
+        sha256: 676c35070db6dbe52f93e9c864ee0fba4eddea94b9c875d9cb10daff453fbaee
+      - file: gemma-4-E4B-it-mmproj.gguf
+        role: mmproj
+        size: 991552256
+        sha256: 7498a37cb619e55f2fcf87eb931f56e99389ed6d432e4c5c66110694c0d65578
+
+  - id: gpt-oss-20b
+    name: "gpt-oss 20B"
+    ram_gb: 16
+    auto: true
+    license: apache-2.0
+    repo: ggml-org/gpt-oss-20b-GGUF
+    revision: ef9b12f2ff56c69cf32153a02784e7a3c88bf524
+    note: "OpenAI's open-weight model, in the MXFP4 precision it was released in.  Strong at step-by-step reasoning.  Text only."
+    license_files:
+      - https://huggingface.co/openai/gpt-oss-20b/resolve/6cee5e81ee83917806bbde320786a8fb61efebee/LICENSE
+      - https://huggingface.co/openai/gpt-oss-20b/resolve/6cee5e81ee83917806bbde320786a8fb61efebee/USAGE_POLICY
+    files:
+      - file: gpt-oss-20b-MXFP4.gguf
+        size: 12109566624
+        sha256: 27cd6c432c7672cb812a92f611cf3ba7bbc35928262bb1e1253ff4ee6ae35901
+
+  - id: gemma-4-26b-a4b
+    name: "Gemma 4 26B-A4B"
+    ram_gb: 24
+    auto: true
+    license: apache-2.0
+    repo: google/gemma-4-26B-A4B-it-qat-q4_0-gguf
+    revision: d1c082be9cf3c8a514acf63b8761f4b41935842e
+    note: "Google's own 4-bit build.  Reads images.  Mixture of experts: only 4B of its 26B parameters work on each word, so it runs well on a CPU."
+    files:
+      - file: gemma-4-26B_q4_0-it.gguf
+        size: 14439363584
+        sha256: 3eca3b8f6d7baf218a7dd6bba5fb59a56ee25fe2d567b6f5f589b4f697eca51d
+      - file: gemma-4-26B-it-mmproj.gguf
+        role: mmproj
+        size: 1194828160
+        sha256: a359953a076b877db30c31dbbb4c6d93b4a6e017ee5db5784247e4d4c0dd4f3b
+
+  - id: gemma-4-31b
+    name: "Gemma 4 31B"
+    ram_gb: 32
+    auto: false
+    license: apache-2.0
+    repo: google/gemma-4-31B-it-qat-q4_0-gguf
+    revision: 59dde24573e7e61570dba08b18a2e1fe246955ed
+    note: "Google's own 4-bit build of its largest Gemma 4.  Reads images.  Dense, so it wants a GPU with 24 GB or a lot of patience."
+    files:
+      - file: gemma-4-31B_q4_0-it.gguf
+        size: 17651001568
+        sha256: 179cfb99212709597eae5929112cfca677e1bbf566178b479ae1da0c4772874b
+      - file: gemma-4-31B-it-mmproj.gguf
+        role: mmproj
+        size: 1200726368
+        sha256: 6bd60bdb958548b4093196d38744b0f2290c12503a3fddd7486bffa9c5eb07a4
+
+  - id: qwen3.8-27b
+    name: "Qwen3.8 27B"
+    ram_gb: 32
+    auto: false
+    license: apache-2.0
+    repo: unsloth/Qwen3.8-27B-GGUF
+    revision: 4ca720788d1e01f1bff70c033e0d0028fd02e502
+    note: "Unsloth's 4-bit quantization of Alibaba's Qwen3.8 27B.  Reads images.  Dense, like Gemma 31B.  A second opinion from a different lab."
+    license_files:
+      - https://huggingface.co/Qwen/Qwen3.8-27B/resolve/1d4bf0f2ff6012fd82039f2fa52739d0dd7c60c0/LICENSE
+    files:
+      - file: Qwen3.8-27B-UD-Q4_K_M.gguf
+        size: 16464440224
+        sha256: 322e194ff79741c7baa497c240f677f54b201b0efab44ca8e50f122b39123482
+      - file: mmproj-BF16.gguf
+        role: mmproj
+        source_file: Signal-3.8-27B-mmproj-BF16.gguf
+        size: 931146432
+        sha256: 83ee4f4f205fa514161778c41df1ea14144faa0f713510893b63c2395f5c2d53
+
+# llama.cpp builds, extracted to the user's computer at launch (exFAT can't
+# hold the symlinks in the Linux and macOS archives).
+llama_cpp:
+  release: b11583
+  assets:
+    - platform: linux-x64
+      file: llama-b11583-bin-ubuntu-x64.tar.gz
+      sha256: a4a681375770db521d15c66bd28339617b833ffc3bcc0a01ff93a883bac80438
+    - platform: linux-x64-vulkan
+      file: llama-b11583-bin-ubuntu-vulkan-x64.tar.gz
+      sha256: 2c331fa6fc874c7757a96df2c0b2ad8856ec258841278fbb45eaab9b5c053332
+    - platform: linux-arm64
+      file: llama-b11583-bin-ubuntu-arm64.tar.gz
+      sha256: fc84ae8a184996ba515824fcc6f8da0fb0c26ec404a07bf1f1b407bf9528c3e2
+    - platform: macos-arm64
+      file: llama-b11583-bin-macos-arm64.tar.gz
+      sha256: d23832f4b847a722a64c9bf57e518c3df81dfab325942182ff17792d5d33351f
+    - platform: macos-x64
+      file: llama-b11583-bin-macos-x64.tar.gz
+      sha256: 65f5da47373f28c4b53d68c257d9926cf5bd6e82172f7880fce6829307db2beb
+    - platform: windows-x64
+      file: llama-b11583-bin-win-cpu-x64.zip
+      sha256: 2bceb716d9d93b950c008c9d81701650965c33e957de9e1d4da325c35c41abfe
+    - platform: windows-x64-vulkan
+      file: llama-b11583-bin-win-vulkan-x64.zip
+      sha256: fa492c41bb38bd3c607aee3580cc02fc432fe771ed9fd1ccceb74f034d82769f
+    - platform: windows-arm64
+      file: llama-b11583-bin-win-cpu-arm64.zip
+      sha256: d289755d4d55d81e8ac2bdc9d682501876acf71d779b4b9642613614dee830a8

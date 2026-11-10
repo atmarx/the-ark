@@ -1,0 +1,220 @@
+# dlp.yml — Data Liberation Project datasets
+# Source: https://www.data-liberation-project.org/datasets/
+#
+# FOIA-obtained U.S. government datasets made freely available by the
+# Data Liberation Project (Jeremy Singer-Vine). Exactly the kind of thing
+# that could quietly disappear — worth carrying on every Ark.
+#
+# Staging path: $ARK_DATA_DIR/dlp/ (default: <staging>/data/dlp/)
+# Download URLs: see each dataset's page for CDN links (dlp-cdn.muckrock.com)
+# Format: typically SQLite + CSV; some include raw FOIA documents
+#
+# Status: catalog only — download automation pending (ark fetch-data TBD)
+
+collection: data-liberation-project
+description: "FOIA-obtained U.S. government datasets — the record before it gets buried"
+staging_path: dlp/
+source: https://www.data-liberation-project.org/datasets/
+
+datasets:
+
+  # ── Environmental & Safety ────────────────────────────────────────────
+
+  - id: epa-risk-management-program
+    title: "EPA Risk Management Program Database"
+    published: 2023-02
+    description: >
+      Chemical hazard plans from ~12,000 facilities using dangerous chemicals.
+      Five-year accident histories, prevention measures, emergency response plans.
+    formats: [sqlite, csv]
+    dataset_page: https://www.data-liberation-project.org/datasets/epa-risk-management-program-database/
+    notes: "The one that started this whole idea."
+
+  - id: hazmat-transportation-incidents
+    title: "Hazmat Transportation Incident Reports"
+    published: 2023-02
+    description: >
+      PHMSA incident reports for hazardous materials spills during transport.
+    formats: [csv]
+    dataset_page: https://www.data-liberation-project.org/datasets/hazmat-transportation-incident-reports/
+
+  - id: boating-accident-database
+    title: "Boating Accident Report Database"
+    published: 2024-08
+    description: >
+      USCG recreational boating accident records — injuries, fatalities, causes.
+    formats: [csv, sqlite]
+    dataset_page: https://www.data-liberation-project.org/datasets/boating-accident-report-database/
+
+  - id: commercial-fishing-incidents
+    title: "Commercial Fishing Incident Database"
+    published: 2024-07
+    description: >
+      USCG commercial fishing vessel casualties and fatalities.
+    formats: [csv]
+    dataset_page: https://www.data-liberation-project.org/datasets/commercial-fishing-incident-database/
+
+  - id: water-use-inventory
+    title: "Water Use Inventory Records"
+    published: 2024-04
+    description: >
+      USGS water use data — withdrawals, consumption, returns by source and sector.
+    formats: [csv]
+    dataset_page: https://www.data-liberation-project.org/datasets/water-use-inventory-records/
+
+  # ── Health & Medicine ─────────────────────────────────────────────────
+
+  - id: federal-inmate-deaths
+    title: "Federal Inmate Deaths"
+    published: 2024-09
+    description: >
+      BOP records of deaths in federal custody — cause, facility, demographics.
+    formats: [csv]
+    dataset_page: https://www.data-liberation-project.org/datasets/federal-inmate-deaths/
+
+  - id: federal-inmate-complaints
+    title: "Federal Inmate Complaints"
+    published: 2024-07
+    description: >
+      BOP Administrative Remedy Program — complaints filed by federal inmates.
+    formats: [sqlite, csv]
+    dataset_page: https://www.data-liberation-project.org/datasets/federal-inmate-complaints/
+
+  - id: unaccompanied-child-incidents
+    title: "Unaccompanied Child Incident Reports"
+    published: 2023-10
+    description: >
+      HHS/ORR incident reports from facilities housing unaccompanied migrant children.
+    formats: [csv]
+    dataset_page: https://www.data-liberation-project.org/datasets/unaccompanied-child-incident-reports/
+
+  - id: acute-hospital-care-at-home
+    title: "Acute Hospital Care at Home Data"
+    published: 2023-07
+    description: >
+      CMS waiver program data — hospitals approved for home-based acute care.
+    formats: [csv]
+    dataset_page: https://www.data-liberation-project.org/datasets/acute-hospital-care-at-home/
+
+  - id: national-adult-maltreatment-reporting
+    title: "National Adult Maltreatment Reporting System"
+    published: 2024-05
+    description: >
+      HHS APS program data on adult protective services referrals and outcomes.
+    formats: [csv]
+    dataset_page: https://www.data-liberation-project.org/datasets/national-adult-maltreatment-reporting-system/
+
+  - id: veterans-affairs-ssvf-survey
+    title: "Veterans Affairs SSVF Survey Data"
+    published: 2023-08
+    description: >
+      Supportive Services for Veteran Families — client surveys and outcomes.
+    formats: [csv]
+    dataset_page: https://www.data-liberation-project.org/datasets/veterans-affairs-ssvf-survey-data/
+
+  - id: cms-medicare-appeals-level-2
+    title: "CMS Medicare Appeals Level 2"
+    published: 2025-03
+    description: >
+      Qualified Independent Contractor appeals decisions — who wins, who loses, what over.
+    formats: [csv]
+    dataset_page: https://www.data-liberation-project.org/datasets/cms-medicare-appeals-level-2/
+
+  - id: doe-student-loan-cancer-deferments
+    title: "DOE Student Loan Cancer Treatment Deferments"
+    published: 2024-12
+    description: >
+      Borrowers who received student loan deferments due to cancer treatment.
+    formats: [csv]
+    dataset_page: https://www.data-liberation-project.org/datasets/doe-student-loan-cancer-treatment-deferments/
+
+  # ── Law Enforcement & Justice ─────────────────────────────────────────
+
+  - id: theft-loss-controlled-substances
+    title: "Theft/Loss of Controlled Substances"
+    published: 2023-05
+    description: >
+      DEA reports of stolen or lost controlled substances from pharmacies, hospitals, etc.
+    formats: [csv]
+    dataset_page: https://www.data-liberation-project.org/datasets/theft-loss-of-controlled-substances/
+
+  - id: firearm-background-check-counts
+    title: "Firearm Background Check Counts"
+    published: 2024-04
+    description: >
+      FBI NICS background check totals by state and month.
+    formats: [csv]
+    dataset_page: https://www.data-liberation-project.org/datasets/firearm-background-check-counts/
+
+  - id: cfpb-enforcement-relief-penalties
+    title: "CFPB Enforcement Relief & Penalties"
+    published: 2023-10
+    description: >
+      Consumer Financial Protection Bureau enforcement actions — penalties and relief ordered.
+    formats: [csv]
+    dataset_page: https://www.data-liberation-project.org/datasets/cfpb-enforcement-relief-penalties/
+
+  # ── Agriculture & Food ────────────────────────────────────────────────
+
+  - id: aphis-inspection-reports
+    title: "APHIS Inspection Reports"
+    published: 2023-02
+    description: >
+      USDA Animal and Plant Health Inspection Service — facility inspections,
+      violations, animal welfare enforcement.
+    formats: [csv, sqlite]
+    dataset_page: https://www.data-liberation-project.org/datasets/aphis-inspection-reports/
+
+  - id: usda-organic-enforcement
+    title: "USDA Organic Program Enforcement"
+    published: 2024-04
+    description: >
+      NOP enforcement actions against fraudulent organic labeling claims.
+    formats: [csv]
+    dataset_page: https://www.data-liberation-project.org/datasets/usda-organic-program-enforcement/
+
+  # ── Travel & Transportation ───────────────────────────────────────────
+
+  - id: tsa-complaint-counts
+    title: "TSA Complaint Counts"
+    published: 2024-02
+    description: >
+      Passenger complaints to TSA by airport, category, and month.
+    formats: [csv]
+    dataset_page: https://www.data-liberation-project.org/datasets/tsa-complaint-counts/
+
+  - id: dot-political-candidates-airline-credit
+    title: "DOT Political Candidates Airline Credit"
+    published: 2025-07
+    description: >
+      Airline fare discounts provided to federal political candidates under DOT rules.
+    formats: [csv]
+    dataset_page: https://www.data-liberation-project.org/datasets/dot-political-candidates-airline-credit/
+
+  # ── Military & Defense ────────────────────────────────────────────────
+
+  - id: dod-excess-defense-article-transfers
+    title: "DOD Excess Defense Article Transfers"
+    published: 2025-09
+    description: >
+      Military equipment transferred to foreign governments under EDA program.
+    formats: [csv]
+    dataset_page: https://www.data-liberation-project.org/datasets/dod-excess-defense-article-transfers/
+
+  - id: dod-army-slot-machines
+    title: "DOD Army Slot Machines"
+    published: 2025-08
+    description: >
+      Army gaming machine revenue data — slot machines on military installations.
+    formats: [csv]
+    dataset_page: https://www.data-liberation-project.org/datasets/dod-army-slot-machines/
+
+  # ── Nonprofit & Social Services ───────────────────────────────────────
+
+  - id: peace-corps-resignation-counts
+    title: "Peace Corps Resignation Counts"
+    published: 2023-10
+    description: >
+      Volunteer resignation counts by country and reason category.
+    formats: [csv]
+    dataset_page: https://www.data-liberation-project.org/datasets/peace-corps-resignation-counts/

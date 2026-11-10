@@ -133,7 +133,7 @@ ark_manifest_each_iso() {
 # Get list of kiwix platforms to bundle
 ark_manifest_kiwix_platforms() {
     local manifest="$1"
-    yq -r '.kiwix_platforms[]? // empty' "$manifest"
+    yq -r '.kiwix_platforms[]? // ""' "$manifest" 2>/dev/null || true
 }
 
 # ---------------------------------------------------------------------------

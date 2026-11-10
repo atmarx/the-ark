@@ -19,17 +19,30 @@ _ark_kiwix_latest() {
 
     local url="${_KIWIX_RELEASE_BASE}/${release_dir}/"
     local listing
-    listing="$(curl -sL "$url")" || {
+    listing="$(ark_curl -sL "$url")" || {
         ark_warn "Failed to fetch release listing: $url"
         return 1
     }
 
+    if [[ -z "$listing" ]]; then
+        ark_warn "Empty response from release listing: $url"
+        return 1
+    fi
+
     # Extract hrefs, filter by pattern, sort by version, take latest
-    echo "$listing" \
+    local result
+    result="$(echo "$listing" \
         | grep -oP 'href="\K[^"]+' \
         | grep -E "$pattern" \
         | sort -V \
-        | tail -1
+        | tail -1)"
+
+    if [[ -z "$result" ]]; then
+        ark_warn "No release found matching '$pattern' at $url"
+        return 1
+    fi
+
+    printf '%s' "$result"
 }
 
 # Download a Kiwix binary to the loadout's kiwix/ directory
@@ -50,7 +63,7 @@ _ark_kiwix_download() {
     fi
 
     ark_info "Fetching: $dest_subdir/$filename"
-    curl -sL --fail --progress-bar -o "$dest" "$url" || {
+    curl --connect-timeout "$ARK_CURL_CONNECT_TIMEOUT" -L --fail --progress-bar -o "$dest" "$url" || {
         ark_error "Failed to download: $url"
         rm -f "$dest"
         return 1

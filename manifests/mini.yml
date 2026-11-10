@@ -3,7 +3,7 @@
 # Fits on a 240-250 GB SSD — perfect for old drives finding a new purpose.
 
 loadout: mini
-description: "The essential loadout — Wikipedia (text), medical, survival, programming, 3 languages"
+description: "The essential loadout: Wikipedia (text), medical, survival, programming"
 target_size_gb: 223
 
 zim:
@@ -14,7 +14,7 @@ zim:
     tier: foundation
     note: "Full English Wikipedia, all articles, no images — 47.6 GB vs 115 GB with images"
 
-  - name: wikipedia_en_simple_all
+  - name: wikipedia_en-simple_all
     flavour: maxi
     tier: foundation
     note: "Simple English — images included, it's only 3 GB and great for kids"
@@ -79,6 +79,49 @@ zim:
   - name: law.stackexchange.com_en_all
     tier: practical
 
+  # ── Field Manual, smallest pieces (~1.5 GB) ───────────────────────────
+  # Added 2026-10-08.  Small files with a lot of value per byte.
+
+  # WikEM is gone: not in the catalog (2026-11-01) or anywhere on the mirror
+  # (val, 2026-11-07), and no Ark we've inspected ever carried it.  Restore
+  # the entry if it comes back.  — Zim
+  # - name: wikem_en_all
+  #   flavour: maxi
+  #   tier: field
+  #   note: "WikEM: emergency medicine reference written by ER clinicians"
+
+  - name: irp.fas.org_en_military-medicine
+    tier: field
+    note: "Military medicine manuals: field and trauma care"
+
+  - name: zimgit-medicine_en
+    tier: field
+    note: "Curated austere-medicine library"
+
+  - name: zimgit-water_en
+    tier: field
+    note: "Finding, purifying, and storing water"
+
+  - name: zimgit-food-preparation_en
+    tier: field
+    note: "Food preparation and preservation"
+
+  - name: zimgit-post-disaster_en
+    tier: field
+    note: "Post-disaster recovery guides"
+
+  - name: zimgit-knots_en
+    tier: field
+    note: "Knots"
+
+  - name: ham.stackexchange.com_en_all
+    tier: practical
+    note: "Amateur radio"
+
+  - name: mechanics.stackexchange.com_en_all
+    tier: practical
+    note: "Motor vehicle maintenance and repair"
+
   - name: astronomy.stackexchange.com_en_all
     tier: practical
 
@@ -109,27 +152,19 @@ zim:
 
   # ── Primary Sources (~18 GB) ───────────────────────────────────
 
+  # HOLD: the 2026-09 build lost 81% of its articles (4.6M -> 858k).  Keep the
+  # last full builds, which are on download.kiwix.org but no longer in the catalog:
+  # maxi 2026-05 (19.7 GB), nopic 2026-08 (12.1 GB).  Don't let freshen/sync take
+  # a newer one until the article count comes back.  — Zim, 2026-10-13
+  # nopic on mini: same articles, 12 GB instead of 20.
   - name: wikisource_en_all
-    flavour: maxi
+    flavour: nopic
     tier: culture
     note: "Constitutions, treaties, historical speeches, legislation"
 
-  # ── Multilingual Wikipedia nopic (~20 GB) ──────────────────────
-
-  - name: wikipedia_es_all
-    flavour: nopic
-    tier: multilingual
-    note: "Spanish — text only, 9.4 GB"
-
-  - name: wikipedia_zh_all
-    flavour: nopic
-    tier: multilingual
-    note: "Mandarin Chinese — text only, 11 GB"
-
-  # ── Stack Overflow (~75 GB) ────────────────────────────────────
-  # This is the swing item. At 75 GB it fills most of the remaining
-  # space but it's the most practically useful programming resource
-  # ever assembled. Comment it out if you need the space.
+  # ── Stack Overflow (~115 GB) ───────────────────────────────────
+  # This is the swing item.  At 115 GB it's about half the drive.
+  # Comment it out if you need the space.
 
   - name: stackoverflow.com_en_all
     tier: programming
@@ -148,11 +183,11 @@ pdfs:
 # Mini gets just Debian stable + Tails — most useful on a small drive
 
 isos:
-  - torrent_url: "https://cdimage.debian.org/cdimage/release/current/amd64/bt-dvd/debian-13.4.0-amd64-DVD-1.iso.torrent"
+  - torrent_url: "https://cdimage.debian.org/cdimage/release/current/amd64/bt-dvd/debian-13.7.0-amd64-DVD-1.iso.torrent"
     note: "Debian 13 Trixie (stable) — current release"
 
-  - url: "https://download.tails.net/tails/stable/tails-amd64-7.5/tails-amd64-7.5.iso"
-    note: "Tails 7.5 — privacy-focused OS, boots from USB, no install needed"
+  - url: "https://download.tails.net/tails/stable/tails-amd64-7.14/tails-amd64-7.14.iso"
+    note: "Tails 7.14 — privacy-focused OS, boots from USB, no install needed"
 
 # ── shame/ — Accountability Archives ────────────────────────────────────
 
